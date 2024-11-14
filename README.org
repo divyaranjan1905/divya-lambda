@@ -1,0 +1,5 @@
+#+TITLE: Divya’s Guix Channel
+
+This is a personal Guix channel by Divya Ranjan, which aims to mostly fulfil the package requirements of the same, in those casese whence upstream packages are found to be unsatisfactory.
+
+The packages here eventually plan to find themselves in the Guix repository upstream.
