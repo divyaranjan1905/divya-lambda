@@ -1961,7 +1961,7 @@
       "This package provides Import lib for Windows.")
     (license (list license:expat license:asl2.0))))
 
-(define blue-recorder
+(define-public blue-recorder
   (package
     (name "blue-recorder")
     (version "0.2.0")
@@ -1984,7 +1984,9 @@
 		       (lambda _
 			 (let ((p (open-file "Cargo.toml" "a")))
 			   (display "\n[net]\ngit-fetch-with-cli = true" p)
-			   (close-port p)))))
+			   (close-port p))))
+		     (add-after 'build 'fail
+		       (/ 0 0)))
         #:cargo-inputs
         (("rust-async-std" ,rust-async-std-1)
          ("rust-chrono" ,rust-chrono-0.4)
@@ -2011,5 +2013,3 @@
 Built using GTK4 and ffmpeg.  It supports recording audio and video on almost all Linux
 interfaces with support for Wayland display server on GNOME session.")
     (license license:gpl3)))
-
-blue-recorder
