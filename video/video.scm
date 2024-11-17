@@ -1986,7 +1986,7 @@
 			   (display "\n[net]\ngit-fetch-with-cli = true" p)
 			   (close-port p))))
 		     (add-after 'build 'fail
-		       (/ 0 0)))
+		       (lambda _ (error "fail for me baby"))))
         #:cargo-inputs
         (("rust-async-std" ,rust-async-std-1)
          ("rust-chrono" ,rust-chrono-0.4)
