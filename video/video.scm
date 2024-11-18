@@ -13,6 +13,32 @@
   #:use-module
   (guix packages)
   #:use-module
+  (gnu packages pkg-config)
+  #:use-module
+  (gnu packages glib)
+  #:use-module
+  (gnu packages gtk)
+  #:use-module
+  (gnu packages gstreamer)
+  #:use-module
+  (gnu packages gettext)
+  #:use-module
+  (gnu packages pulseaudio)
+  #:use-module
+  (gnu packages freedesktop)
+  #:use-module
+  (gnu packages video)
+  #:use-module
+  (gnu packages base)
+  #:use-module
+  (gnu packages autotools)
+  #:use-module
+  (gnu packages llvm)
+  #:use-module
+  (gnu packages xorg)
+  #:use-module
+  (gnu packages compression)
+  #:use-module
   (guix gexp)
   #:use-module
   (gnu packages crates-windows)
@@ -24,23 +50,6 @@
   (gnu packages crates-apple)
   #:use-module
   (gnu packages crates-io))
-
-;;; TODO: Manual hash fix: rust-blue-recorder
-;;; TODO: Fix home-page, synopsis, description and license for rust-blue-recorder
-;;; TODO: Manual hash fix: rust-cairo-rs
-;;; TODO: Manual hash fix: rust-cairo-sys-rs
-;;; TODO: Manual hash fix: rust-gdk-pixbuf
-;;; TODO: Manual hash fix: rust-gdk-pixbuf-sys
-;;; TODO: Manual hash fix: rust-gdk4
-;;; TODO: Manual hash fix: rust-gdk4-sys
-;;; TODO: Manual hash fix: rust-gio
-;;; TODO: Manual hash fix: rust-gio-sys
-;;; TODO: Manual hash fix: rust-glib
-;;; TODO: Manual hash fix: rust-glib-macros
-;;; TODO: Manual hash fix: rust-glib-sys
-;;; TODO: Manual hash fix: rust-gobject-sys
-;;; TODO: Manual hash fix: rust-pango
-;;; TODO: Manual hash fix: rust-pango-sys
 
 (define rust-async-attributes-1
   (package
@@ -1971,45 +1980,77 @@
         (uri (git-reference
 	      (url "https://github.com/xlmnxp/blue-recorder")
 	      (commit "1cfa3bbb1b5ea845b3e4c51eba269745f0c3e271")))
+
+	(snippet
+         #~(begin (use-modules (guix build utils))
+                  (substitute* "Cargo.toml"
+                    (("gdk = \\{ git =.+")
+                     "gdk = { version = \"0.7.3\", package = \"gdk4\" }\n")))) ; We have this version in guix already
+
         (file-name
-          (git-file-name name version))
+         (git-file-name name version))
         (sha256
-          (base32
-	    "0fz5l1z5rq8gx2vhrpfnf5l5karlqa7m8fdwx7ixlvy5klywwa5y"))))
+         (base32
+	  "0fz5l1z5rq8gx2vhrpfnf5l5karlqa7m8fdwx7ixlvy5klywwa5y"))))
     (build-system cargo-build-system)
     (arguments
-      `(#:cargo-build-flags '("--release")
-	#:phases (modify-phases %standard-phases
-		     (add-after 'configure 'cargo-patch
-		       (lambda _
-			 (let ((p (open-file "Cargo.toml" "a")))
-			   (display "\n[net]\ngit-fetch-with-cli = true" p)
-			   (close-port p))))
-		     (add-after 'build 'fail
-		       (lambda _ (error "fail for me baby"))))
-        #:cargo-inputs
-        (("rust-async-std" ,rust-async-std-1)
-         ("rust-chrono" ,rust-chrono-0.4)
-         ("rust-dark-light" ,rust-dark-light-1)
-         ("rust-dirs" ,rust-dirs-4)
-         ("rust-filename" ,rust-filename-0.1)
-         ("rust-gdk-pixbuf" ,rust-gdk-pixbuf-0.9)
-         ("rust-gdk4" ,rust-gdk4-0.8)
-         ("rust-gettext-rs" ,rust-gettext-rs-0.7)
-         ("rust-gio" ,rust-gio-0.15)
-         ("rust-glib" ,rust-glib-0.10)
-         ("rust-gstreamer" ,rust-gstreamer-0.20)
-         ("rust-gtk-sys" ,rust-gtk-sys-0.15)
-         ("rust-gtk4" ,rust-gtk4-0.4)
-         ("rust-regex" ,rust-regex-1)
-         ("rust-rust-ini" ,rust-rust-ini-0.16)
-         ("rust-secfmt" ,rust-secfmt-0.1)
-         ("rust-subprocess" ,rust-subprocess-0.2)
-         ("rust-tempfile" ,rust-tempfile-3)
-         ("rust-zbus" ,rust-zbus-3))))
+     `(#:cargo-build-flags '("--release")
+       #:phases #~(modify-phases %standard-phases
+				 (add-after 'install 'wrap-paths
+					    (lambda _
+					      (let* ((bin (string-append #$output "/bin"))
+						     (name-version (string-append #$name "-" #$version))
+						     (blue-recorder (string-append bin "/blue-recorder"))
+						     (src (string-append #$output "/share/cargo/src/"))
+						     (po (string-append src name-version "/po/"))
+						     (data (string-append src name-version "/data/")))
+						(wrap-program blue-recorder
+							      `("PO_DIR" prefix (,po))
+							      `("DATA_DIR" prefix (,data)))))))
+       #:cargo-inputs
+       (("rust-async-std" ,rust-async-std-1)
+        ("rust-chrono" ,rust-chrono-0.4)
+        ("rust-dark-light" ,rust-dark-light-1)
+        ("rust-dirs" ,rust-dirs-4)
+        ("rust-filename" ,rust-filename-0.1)
+        ("rust-gdk-pixbuf" ,rust-gdk-pixbuf-0.9)
+        ("rust-gdk4" ,rust-gdk4-0.7)
+        ("rust-gettext-rs" ,rust-gettext-rs-0.7)
+        ("rust-gio" ,rust-gio-0.15)
+        ("rust-glib" ,rust-glib-0.10)
+        ("rust-gstreamer" ,rust-gstreamer-0.20)
+        ("rust-gtk-sys" ,rust-gtk-sys-0.15)
+        ("rust-gtk4" ,rust-gtk4-0.4)
+        ("rust-regex" ,rust-regex-1)
+        ("rust-rust-ini" ,rust-rust-ini-0.16)
+        ("rust-secfmt" ,rust-secfmt-0.1)
+        ("rust-subprocess" ,rust-subprocess-0.2)
+        ("rust-tempfile" ,rust-tempfile-3)
+        ("rust-zbus" ,rust-zbus-3))))
+    (native-inputs (list pkg-config
+			 glib
+			 graphene
+			 gstreamer
+			 gnu-gettext
+			 ;; pulseaudio
+			 libappindicator
+			 ;; gtk
+			 ;; gtk+
+			 ;; ffmpeg
+			 ;; xwininfo
+			 xz))
+    (inputs (list glib))
+    (propagated-inputs (list ffmpeg
+			     gtk
+			     gtk+
+			     xwininfo
+			     libappindicator
+			     pulseaudio))
     (home-page "https://github.com/xlmnxp/blue-recorder/")
     (synopsis "Simple Screen Recorder written in Rust based on Green Recorder")
     (description "A simple desktop recorder for Linux systems.
 Built using GTK4 and ffmpeg.  It supports recording audio and video on almost all Linux
 interfaces with support for Wayland display server on GNOME session.")
     (license license:gpl3)))
+
+blue-recorder
