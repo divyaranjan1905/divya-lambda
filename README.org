@@ -8,6 +8,7 @@ The packages here eventually plan to find themselves in the Guix repository upst
 * Channel Definition
 You can add this channel to your configuration by adding the following to =~/.config/guix/channels.scm=:
 
+
 #+begin_src scheme
   (channel
    (name 'divya-lambda)
