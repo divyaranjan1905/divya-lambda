@@ -9,15 +9,15 @@ The packages here eventually plan to find themselves in the Guix repository upst
 You can add this channel to your configuration by adding the following to =~/.config/guix/channels.scm=:
 
 #+begin_src scheme
-(channel
-  (name 'divya-lambda)
-  (url "https://codeberg.org/divyaranjan/divya-lambda.git")
-  (branch "master")
-  (introduction
-   (make-channel-introduction
-    "e6ad7fe392ad8318e90b9dd4bfd077a8c674b467"
-    (openpgp-fingerprint
-     "02EE 7ADC 9288 B1CD 3FF3  265D DD85 7742 AA60 EDBA"))))
+  (channel
+   (name 'divya-lambda)
+   (url "https://codeberg.org/divyaranjan/divya-lambda.git")
+   (branch "master")
+   (introduction
+    (make-channel-introduction
+     "5b8bf6080d9bc7744b429048f34041828de0dd7d"
+     (openpgp-fingerprint
+      "F0B3 1A69 8006 8FB8 096A  2F12 B245 10C6 108C 8D4A"))))
 #+end_src
 
 * Other channels
