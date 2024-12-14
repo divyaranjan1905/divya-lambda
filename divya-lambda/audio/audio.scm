@@ -1,6 +1,6 @@
 ;;; Divya’s Guix audio or sound related packages
 
-(define-module (audio)
+(define-module (divya-lambda audio)
   #:use-module (gnu packages audio)
   #:use-module (gnu packages commencement)
   #:use-module (gnu packages gettext)

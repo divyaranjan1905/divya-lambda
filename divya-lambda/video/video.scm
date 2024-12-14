@@ -1,7 +1,7 @@
 ;; Packages related to all things video
 
 (define-module
-  (video)
+  (divya-lambda video)
   #:use-module
   ((guix licenses) #:prefix license:)
   #:use-module
