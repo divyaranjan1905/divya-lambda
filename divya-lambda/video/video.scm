@@ -1,4 +1,4 @@
-;; Packages related to all things video
+;;; Packages related to all things video
 
 (define-module
   (divya-lambda video)
@@ -484,12 +484,7 @@
 			 graphene
 			 gstreamer
 			 gnu-gettext
-			 ;; pulseaudio
 			 libappindicator
-			 ;; gtk
-			 ;; gtk+
-			 ;; ffmpeg
-			 ;; xwininfo
 			 xz))
     (inputs (list glib))
     (propagated-inputs (list ffmpeg
