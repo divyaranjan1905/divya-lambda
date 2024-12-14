@@ -1,23 +1,40 @@
 ;;; Divya’s Guix audio or sound related packages
 
-(define-module (divya-lambda audio)
-  #:use-module (gnu packages audio)
-  #:use-module (gnu packages commencement)
-  #:use-module (gnu packages gettext)
-  #:use-module (gnu packages glib)
-  #:use-module (gnu packages bash)
-  #:use-module (gnu packages gtk)
-  #:use-module (gnu packages pkg-config)
-  #:use-module (gnu packages python)
-  #:use-module (gnu packages python-xyz)
+(define-module
+  (divya-lambda audio)
+  #:use-module
+  (gnu packages audio)
+  #:use-module
+  (gnu packages commencement)
+  #:use-module
+  (gnu packages gettext)
+  #:use-module
+  (gnu packages glib)
+  #:use-module
+  (gnu packages bash)
+  #:use-module
+  (gnu packages gtk)
+  #:use-module
+  (gnu packages pkg-config)
+  #:use-module
+  (gnu packages python)
+  #:use-module
+  (gnu packages python-xyz)
 
-  #:use-module (guix build utils)
-  #:use-module (guix build-system meson)
-  #:use-module (guix gexp)
-  #:use-module (guix git-download)
-  #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (guix packages)
-  #:use-module (guix utils))
+  #:use-module
+  (guix build utils)
+  #:use-module
+  (guix build-system meson)
+  #:use-module
+  (guix gexp)
+  #:use-module
+  (guix git-download)
+  #:use-module
+  ((guix licenses) #:prefix license:)
+  #:use-module
+  (guix packages)
+  #:use-module
+  (guix utils))
 
 (define-public jack-mixer
   (package
