@@ -16,7 +16,7 @@ You can add this channel to your configuration by adding the following to =~/.co
   (branch "master")
   (introduction
    (make-channel-introduction
-    "b02f5e53da4c8816fceda4387f3335666a05c808"
+    "b02f5e53d4c8816fceda4387f3335666a05c808"
     (openpgp-fingerprint
      "F0B3 1A69 8006 8FB8 096A  2F12 B245 10C6 108C 8D4A"))))
 #+end_src
