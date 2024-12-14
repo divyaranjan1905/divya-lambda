@@ -504,5 +504,3 @@
 Built using GTK4 and ffmpeg.  It supports recording audio and video on almost all Linux
 interfaces with support for Wayland display server on GNOME session.")
     (license license:gpl3)))
-
-blue-recorder
