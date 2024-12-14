@@ -11,14 +11,14 @@ You can add this channel to your configuration by adding the following to =~/.co
 
 #+begin_src scheme
   (channel
-   (name 'divya-lambda)
-   (url "https://codeberg.org/divyaranjan/divya-lambda.git")
-   (branch "master")
-   (introduction
-    (make-channel-introduction
-     "5b8bf6080d9bc7744b429048f34041828de0dd7d"
-     (openpgp-fingerprint
-      "F0B3 1A69 8006 8FB8 096A  2F12 B245 10C6 108C 8D4A"))))
+  (name 'divya-lambda)
+  (url "https://codeberg.org/divyaranjan/divya-lambda.git")
+  (branch "master")
+  (introduction
+   (make-channel-introduction
+    "b02f5e53da4c8816fceda4387f3335666a05c808"
+    (openpgp-fingerprint
+     "F0B3 1A69 8006 8FB8 096A  2F12 B245 10C6 108C 8D4A"))))
 #+end_src
 
 * Other channels
