@@ -1,4 +1,5 @@
 #+TITLE: ∂λ
+#+OPTIONS: toc:nil num: nil
 
 This is a personal Guix channel (pronounced "Divya Lambda") by me which aims to mostly fulfil the package requirements of the same, in those casese whence upstream packages are found to be unsatisfactory.
 
