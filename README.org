@@ -1,5 +1,26 @@
-#+TITLE: Divya’s Guix Channel
+#+TITLE: ∂λ
 
-This is a personal Guix channel by Divya Ranjan, which aims to mostly fulfil the package requirements of the same, in those casese whence upstream packages are found to be unsatisfactory.
+This is a personal Guix channel (pronounced "Divya Lambda") by me which aims to mostly fulfil the package requirements of the same, in those casese whence upstream packages are found to be unsatisfactory.
 
-The packages here eventually plan to find themselves in the Guix repository upstream.
+The packages here eventually plan to find themselves in the Guix repository upstream. My specific interests are in packaging Haskell, Rust packages and toolchain, libre audio software, among others.
+
+* Channel Definition
+You can add this channel to your configuration by adding the following to =~/.config/guix/channels.scm=:
+
+#+begin_src scheme
+(channel
+  (name 'divya-lambda)
+  (url "https://codeberg.org/divyaranjan/divya-lambda.git")
+  (branch "master")
+  (introduction
+   (make-channel-introduction
+    "e6ad7fe392ad8318e90b9dd4bfd077a8c674b467"
+    (openpgp-fingerprint
+     "02EE 7ADC 9288 B1CD 3FF3  265D DD85 7742 AA60 EDBA"))))
+#+end_src
+
+* Other channels
+These are some other interesting channels worth checking out:
+
+- [[https://codeberg.org/anemofilia/radix][GNU/Radix]]
+- [[https://github.com/umanwizard/guix-rust-next][rust-next]]
