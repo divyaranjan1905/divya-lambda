@@ -18,10 +18,7 @@
   #:use-module
   (gnu packages emacs)
   #:use-module
-  (gnu packages gtk)
-
-  #:use-module
-  (emacs-master))
+  (gnu packages gtk))
 
 
 ;; Updated from emacs-master channel: https://codeberg.org/akib/guix-channel-emacs-master/src/branch/master/emacs-master.scm
