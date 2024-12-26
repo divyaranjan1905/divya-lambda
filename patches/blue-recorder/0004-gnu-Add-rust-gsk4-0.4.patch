@@ -1,0 +1,56 @@
+From af4a033af8df613ebbce83c8a1134e463d4fbdf5 Mon Sep 17 00:00:00 2001
+From: Divya Ranjan <divya@subvertising.org>
+Date: Wed, 11 Dec 2024 01:04:00 +0000
+Subject: [PATCH 04/10] gnu: Add rust-gsk4-0.4.
+
+* gnu/packages/crates-gtk.scm (rust-gsk4-0.4): New variable.
+
+Change-Id: Idcc9d53855705e3d31b4452ffb508a297edd1d14
+---
+ gnu/packages/crates-gtk.scm | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+
+diff --git a/gnu/packages/crates-gtk.scm b/gnu/packages/crates-gtk.scm
+index e5a52555d9..b1b8115ea8 100644
+--- a/gnu/packages/crates-gtk.scm
++++ b/gnu/packages/crates-gtk.scm
+@@ -3038,6 +3038,36 @@ (define-public rust-gsk4-0.7
+        #:cargo-development-inputs
+        (("rust-gir-format-check" ,rust-gir-format-check-0.1))))))
+ 
++(define-public rust-gsk4-0.4
++  (package
++    (name "rust-gsk4")
++    (version "0.4.8")
++    (source
++      (origin
++        (method url-fetch)
++        (uri (crate-uri "gsk4" version))
++        (file-name
++          (string-append name "-" version ".tar.gz"))
++        (sha256
++          (base32
++	    "1r0vnrgdpkavxkq67bgixcp72l4vz9dlk5nl72mb701j6c6h5s85"))))
++    (build-system cargo-build-system)
++    (arguments
++      `(#:cargo-inputs
++        (("rust-bitflags" ,rust-bitflags-1)
++         ("rust-cairo-rs" ,rust-cairo-rs-0.15)
++         ("rust-gdk4" ,rust-gdk4-0.4)
++         ("rust-glib" ,rust-glib-0.15)
++         ("rust-graphene-rs" ,rust-graphene-rs-0.15)
++         ("rust-gsk4-sys" ,rust-gsk4-sys-0.4)
++         ("rust-libc" ,rust-libc-0.2)
++         ("rust-pango" ,rust-pango-0.15))))
++    (home-page "https://gtk-rs.org/gtk4-rs")
++    (synopsis "Rust bindings of the GSK 4 library")
++    (description
++      "This package provides Rust bindings of the GSK 4 library.")
++    (license license:expat)))
++
+ (define-public rust-gsk4-sys-0.8
+   (package
+     (name "rust-gsk4-sys")
+-- 
+2.46.0
+

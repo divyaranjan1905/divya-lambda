@@ -1,0 +1,57 @@
+From e8d45b4a879ef9858ee5c745966a597f2a03f22d Mon Sep 17 00:00:00 2001
+From: Divya Ranjan <divya@subvertising.org>
+Date: Wed, 11 Dec 2024 01:03:13 +0000
+Subject: [PATCH 01/10] gnu: Add rust-gdk4-sys-0.4.
+
+* gnu/packages/crates-gtk.scm (rust-gdk4-sys-0.4): New variable.
+
+Change-Id: I5e2151b64f99acdd296772b1bd72df4ba9585922
+---
+ gnu/packages/crates-gtk.scm | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+
+diff --git a/gnu/packages/crates-gtk.scm b/gnu/packages/crates-gtk.scm
+index ed3c919b78..737e428171 100644
+--- a/gnu/packages/crates-gtk.scm
++++ b/gnu/packages/crates-gtk.scm
+@@ -1362,6 +1362,37 @@ (define-public rust-gdk4-sys-0.7
+        #:cargo-development-inputs (("rust-shell-words" ,rust-shell-words-1)
+                                    ("rust-tempfile" ,rust-tempfile-3))))))
+ 
++(define-public rust-gdk4-sys-0.4
++  (package
++    (name "rust-gdk4-sys")
++    (version "0.4.8")
++    (source
++      (origin
++        (method url-fetch)
++        (uri (crate-uri "gdk4-sys" version))
++        (file-name
++          (string-append name "-" version ".tar.gz"))
++        (sha256
++          (base32
++	    "1wnfv62n9dmpzg9rpy3hj1aldpkkavyans9zzymsw02w9ysdrrzg"))))
++    (build-system cargo-build-system)
++    (arguments
++      `(#:cargo-inputs
++        (("rust-cairo-sys-rs" ,rust-cairo-sys-rs-0.20)
++         ("rust-gdk-pixbuf-sys" ,rust-gdk-pixbuf-sys-0.15)
++         ("rust-gio-sys" ,rust-gio-sys-0.15)
++         ("rust-glib-sys" ,rust-glib-sys-0.15)
++         ("rust-gobject-sys" ,rust-gobject-sys-0.15)
++         ("rust-libc" ,rust-libc-0.2)
++         ("rust-pango-sys" ,rust-pango-sys-0.15)
++         ("rust-pkg-config" ,rust-pkg-config-0.3)
++         ("rust-system-deps" ,rust-system-deps-6))))
++    (home-page "https://gtk-rs.org/gtk4-rs")
++    (synopsis "FFI bindings of GDK 4")
++    (description
++      "This package provides FFI bindings of GDK 4.")
++    (license license:expat)))
++
+ (define-public rust-gdk4-wayland-0.7
+   (package
+     (name "rust-gdk4-wayland")
+-- 
+2.46.0
+

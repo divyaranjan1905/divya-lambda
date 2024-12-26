@@ -1,0 +1,231 @@
+From b719ff77ba7fd715b9a5516e048870fdd1a80844 Mon Sep 17 00:00:00 2001
+From: Divya Ranjan <divya@subvertising.org>
+Date: Wed, 11 Dec 2024 01:16:00 +0000
+Subject: [PATCH 10/10] gnu: Add blue-recorder.
+
+* gnu/packages/rust-apps.scm (blue-recorder): New variable.
+
+Change-Id: I898203189f8febd1dcf23cd01456bfe5fbe26c10
+---
+ gnu/packages/rust-apps.scm | 182 ++++++++++++++++++++++++++++---------
+ 1 file changed, 138 insertions(+), 44 deletions(-)
+
+diff --git a/gnu/packages/rust-apps.scm b/gnu/packages/rust-apps.scm
+index 297111d867..f6425333bc 100644
+--- a/gnu/packages/rust-apps.scm
++++ b/gnu/packages/rust-apps.scm
+@@ -33,6 +33,7 @@
+ ;;; Copyright © 2024 Suhail Singh <suhail@bayesians.ca>
+ ;;; Copyright © 2024 Jordan Moore <lockbox@struct.foo>
+ ;;; Copyright © 2024 normally_js <normally_js@posteo.net>
++;;; Copyright © 2024 Divya Ranjan Pattanaik <divya@subvertising.org>
+ ;;;
+ ;;; This file is part of GNU Guix.
+ ;;;
+@@ -82,8 +83,10 @@ (define-module (gnu packages rust-apps)
+   #:use-module (gnu packages fontutils)
+   #:use-module (gnu packages freedesktop)
+   #:use-module (gnu packages haskell-xyz)
++  #:use-module (gnu packages gettext)
+   #:use-module (gnu packages glib)
+   #:use-module (gnu packages gnome)
++  #:use-module (gnu packages gstreamer)
+   #:use-module (gnu packages gtk)
+   #:use-module (gnu packages ibus)
+   #:use-module (gnu packages icu4c)
+@@ -106,6 +109,7 @@ (define-module (gnu packages rust-apps)
+   #:use-module (gnu packages python-xyz)
+   #:use-module (gnu packages sqlite)
+   #:use-module (gnu packages tls)
++  #:use-module (gnu packages video)
+   #:use-module (gnu packages version-control)
+   #:use-module (gnu packages webkit)
+   #:use-module (gnu packages xorg))
+@@ -368,50 +372,140 @@ (define-public bat
+ paging.")
+     (license (list license:expat license:asl2.0))))
+ 
+-(define-public cargo-machete
+-  (package
+-    (name "cargo-machete")
+-    (version "0.7.0")
+-    (source
+-     (origin
+-       (method url-fetch)
+-       (uri (crate-uri name version))
+-       (file-name (string-append name "-" version ".tar.gz"))
+-       (sha256
+-        (base32 "0ha5z1xr26mjprk4vbiy2v9wcwr7ww2jxiamlc8fqwi3d5hvhk1n"))))
+-    (build-system cargo-build-system)
+-    (arguments
+-     `(#:cargo-test-flags
+-       '("--release" "--"
+-         "--skip=search_unused::test_crate_renaming_works"
+-         "--skip=search_unused::test_false_positive_macro_use"
+-         "--skip=search_unused::test_ignore_deps_works"
+-         "--skip=search_unused::test_ignore_deps_workspace_works"
+-         "--skip=search_unused::test_just_unused"
+-         "--skip=search_unused::test_just_unused_with_manifest"
+-         "--skip=search_unused::test_unused_kebab_spec"
+-         "--skip=search_unused::test_unused_renamed_in_registry"
+-         "--skip=search_unused::test_unused_renamed_in_spec"
+-         "--skip=search_unused::test_unused_transitive"
+-         "--skip=search_unused::test_with_bench"
+-         "--skip=test_ignore_target")
+-       #:install-source? #f
+-       #:cargo-inputs (("rust-anyhow" ,rust-anyhow-1)
+-                       ("rust-argh" ,rust-argh-0.1)
+-                       ("rust-cargo-metadata" ,rust-cargo-metadata-0.18)
+-                       ("rust-cargo-toml" ,rust-cargo-toml-0.20)
+-                       ("rust-grep" ,rust-grep-0.3)
+-                       ("rust-ignore" ,rust-ignore-0.4)
+-                       ("rust-log" ,rust-log-0.4)
+-                       ("rust-pretty-env-logger" ,rust-pretty-env-logger-0.5)
+-                       ("rust-rayon" ,rust-rayon-1)
+-                       ("rust-serde" ,rust-serde-1)
+-                       ("rust-toml-edit" ,rust-toml-edit-0.22)
+-                       ("rust-walkdir" ,rust-walkdir-2))))
+-    (home-page "https://github.com/bnjbvr/cargo-machete")
+-    (synopsis "Find unused dependencies in Cargo.toml")
+-    (description "@code{cargo-machete} finds unused dependencies in Cargo.toml.")
+-    (license (list license:expat license:asl2.0))))
++(define-public blue-recorder
++  ;; Tagged releases are infrequent.
++  (let ((commit "1cfa3bbb1b5ea845b3e4c51eba269745f0c3e271")
++        (revision "1"))
++    (package
++      (name "blue-recorder")
++      (version (git-version "0.2.0" revision commit))
++      (source
++       (origin
++         (method git-fetch)
++         (uri (git-reference
++               (url "https://github.com/xlmnxp/blue-recorder")
++               (commit commit)))
++         ;; The original Cargo.toml tries to pull gdk from git, which is impossible
++         ;; during guix build.
++         (snippet #~(begin
++                      (use-modules (guix build utils))
++                      (substitute* "Cargo.toml"
++                        (("gdk = \\{ git =.+")
++                         "gdk = { version = \"0.7.3\", package = \"gdk4\" }
++"))))
++         (file-name (git-file-name name version))
++         (sha256
++          (base32 "0fz5l1z5rq8gx2vhrpfnf5l5karlqa7m8fdwx7ixlvy5klywwa5y"))))
++      (build-system cargo-build-system)
++      (arguments
++       `(#:cargo-build-flags '("--release")
++         #:phases ,#~(modify-phases %standard-phases
++                       ;; As per the application’s build instructions the binary
++                       ;; needs to be wrapped with po and data paths as environment
++                       ;; variables.
++                       (add-after 'install 'wrap-paths
++                         (lambda _
++                           (let* ((bin (string-append #$output "/bin"))
++                                  (name-version (string-append #$name "-"
++                                                               #$version))
++                                  (blue-recorder (string-append bin
++                                                  "/blue-recorder"))
++                                  (src (string-append #$output
++                                                      "/share/cargo/src/"))
++                                  (po (string-append src name-version "/po/"))
++                                  (data (string-append src name-version
++                                                       "/data/")))
++                             (wrap-program blue-recorder
++                               `("PO_DIR" prefix
++                                 (,po))
++                               `("DATA_DIR" prefix
++                                 (,data)))))))
++         #:cargo-inputs (("rust-async-std" ,rust-async-std-1)
++                         ("rust-chrono" ,rust-chrono-0.4)
++                         ("rust-dark-light" ,rust-dark-light-1)
++                         ("rust-dirs" ,rust-dirs-4)
++                         ("rust-filename" ,rust-filename-0.1)
++                         ("rust-gdk-pixbuf" ,rust-gdk-pixbuf-0.9)
++                         ("rust-gdk4" ,rust-gdk4-0.7)
++                         ("rust-gettext-rs" ,rust-gettext-rs-0.7)
++                         ("rust-gio" ,rust-gio-0.15)
++                         ("rust-glib" ,rust-glib-0.10)
++                         ("rust-gstreamer" ,rust-gstreamer-0.21)
++                         ("rust-gtk-sys" ,rust-gtk-sys-0.15)
++                         ("rust-gtk4" ,rust-gtk4-0.4)
++                         ("rust-regex" ,rust-regex-1)
++                         ("rust-rust-ini" ,rust-rust-ini-0.18)
++                         ("rust-secfmt" ,rust-secfmt-0.1)
++                         ("rust-subprocess" ,rust-subprocess-0.2)
++                         ("rust-tempfile" ,rust-tempfile-3)
++                         ("rust-zbus" ,rust-zbus-3))))
++      (native-inputs (list pkg-config
++                           glib
++                           graphene
++                           gstreamer
++                           gettext-minimal
++                           libappindicator
++                           xz))
++      (inputs (list glib bash-minimal))
++      (propagated-inputs (list ffmpeg
++                               gtk
++                               gtk+
++                               xwininfo
++                               libappindicator
++                               pulseaudio))
++      (home-page "https://github.com/xlmnxp/blue-recorder/")
++      (synopsis
++       "Simple Screen Recorder written in Rust based on Green Recorder")
++      (description
++       "A simple desktop recorder for Linux systems.
++Built using GTK4 and ffmpeg.  It supports recording audio and video on almost all Linux
++interfaces with support for Wayland display server on GNOME session.")
++      (license license:gpl3))))
++
++ (define-public cargo-machete
++   (package
++     (name "cargo-machete")
++     (version "0.7.0")
++     (source
++      (origin
++        (method url-fetch)
++        (uri (crate-uri name version))
++        (file-name (string-append name "-" version ".tar.gz"))
++        (sha256
++         (base32 "0ha5z1xr26mjprk4vbiy2v9wcwr7ww2jxiamlc8fqwi3d5hvhk1n"))))
++     (build-system cargo-build-system)
++     (arguments
++      `(#:cargo-test-flags
++        '("--release" "--"
++          "--skip=search_unused::test_crate_renaming_works"
++          "--skip=search_unused::test_false_positive_macro_use"
++          "--skip=search_unused::test_ignore_deps_works"
++          "--skip=search_unused::test_ignore_deps_workspace_works"
++          "--skip=search_unused::test_just_unused"
++          "--skip=search_unused::test_just_unused_with_manifest"
++          "--skip=search_unused::test_unused_kebab_spec"
++          "--skip=search_unused::test_unused_renamed_in_registry"
++          "--skip=search_unused::test_unused_renamed_in_spec"
++          "--skip=search_unused::test_unused_transitive"
++          "--skip=search_unused::test_with_bench"
++          "--skip=test_ignore_target")
++        #:install-source? #f
++        #:cargo-inputs (("rust-anyhow" ,rust-anyhow-1)
++                        ("rust-argh" ,rust-argh-0.1)
++                        ("rust-cargo-metadata" ,rust-cargo-metadata-0.18)
++                        ("rust-cargo-toml" ,rust-cargo-toml-0.20)
++                        ("rust-grep" ,rust-grep-0.3)
++                        ("rust-ignore" ,rust-ignore-0.4)
++                        ("rust-log" ,rust-log-0.4)
++                        ("rust-pretty-env-logger" ,rust-pretty-env-logger-0.5)
++                        ("rust-rayon" ,rust-rayon-1)
++                        ("rust-serde" ,rust-serde-1)
++                        ("rust-toml-edit" ,rust-toml-edit-0.22)
++                        ("rust-walkdir" ,rust-walkdir-2))))
++     (home-page "https://github.com/bnjbvr/cargo-machete")
++     (synopsis "Find unused dependencies in Cargo.toml")
++     (description "@code{cargo-machete} finds unused dependencies in Cargo.toml.")
++     (license (list license:expat license:asl2.0))))
+ 
+ (define-public complgen
+   (package
+-- 
+2.46.0
+

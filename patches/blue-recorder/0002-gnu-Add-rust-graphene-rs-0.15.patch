@@ -1,0 +1,52 @@
+From f70bfe4aae6a79f5fe7f23d2f8129fc36c11a07d Mon Sep 17 00:00:00 2001
+From: Divya Ranjan <divya@subvertising.org>
+Date: Wed, 11 Dec 2024 01:03:27 +0000
+Subject: [PATCH 02/10] gnu: Add rust-graphene-rs-0.15.
+
+* gnu/packages/crates-gtk.scm (rust-graphene-rs-0.15): New variable.
+
+Change-Id: If4e1d704d3864bf770521e20f7ed74e898eb0e70
+---
+ gnu/packages/crates-gtk.scm | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/gnu/packages/crates-gtk.scm b/gnu/packages/crates-gtk.scm
+index 737e428171..73acd5e3c2 100644
+--- a/gnu/packages/crates-gtk.scm
++++ b/gnu/packages/crates-gtk.scm
+@@ -2887,6 +2887,32 @@ (define-public rust-graphene-rs-0.18
+        #:cargo-development-inputs
+        (("rust-gir-format-check" ,rust-gir-format-check-0.1))))))
+ 
++(define-public rust-graphene-rs-0.15
++  (package
++    (name "rust-graphene-rs")
++    (version "0.15.1")
++    (source
++      (origin
++        (method url-fetch)
++        (uri (crate-uri "graphene-rs" version))
++        (file-name
++          (string-append name "-" version ".tar.gz"))
++        (sha256
++          (base32
++	    "0w2mz098dr8mlz18ssmlnln1x6c3byizqbc9kz4n5nzgpvxzjm3w"))))
++    (build-system cargo-build-system)
++    (arguments
++      `(#:cargo-inputs
++        (("rust-glib" ,rust-glib-0.15)
++         ("rust-graphene-sys" ,rust-graphene-sys-0.15)
++         ("rust-libc" ,rust-libc-0.2))))
++    (home-page "https://gtk-rs.org/")
++    (synopsis
++      "Rust bindings for the Graphene library")
++    (description
++      "This package provides Rust bindings for the Graphene library.")
++    (license license:expat)))
++
+ (define-public rust-graphene-sys-0.19
+   (package
+     (name "rust-graphene-sys")
+-- 
+2.46.0
+

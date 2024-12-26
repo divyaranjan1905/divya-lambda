@@ -1,0 +1,58 @@
+From 5e7fcea90056184001c2ecb98582818bc98252d7 Mon Sep 17 00:00:00 2001
+From: Divya Ranjan <divya@subvertising.org>
+Date: Wed, 11 Dec 2024 01:04:32 +0000
+Subject: [PATCH 06/10] gnu: Add rust-gtk-sys-0.15.
+
+* gnu/packages/crates-gtk.scm (rust-gtk-sys-0.15): New variable.
+
+Change-Id: I71708196459658cbc1f9b2945a9ffaf1d31e890d
+---
+ gnu/packages/crates-gtk.scm | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+diff --git a/gnu/packages/crates-gtk.scm b/gnu/packages/crates-gtk.scm
+index b7c650a10c..9a778a059a 100644
+--- a/gnu/packages/crates-gtk.scm
++++ b/gnu/packages/crates-gtk.scm
+@@ -3961,6 +3961,38 @@ (define-public rust-gtk-sys-0.18
+     (description "This package provides FFI bindings to libgtk-3.")
+     (license license:expat)))
+ 
++(define-public rust-gtk-sys-0.15
++  (package
++    (name "rust-gtk-sys")
++    (version "0.15.3")
++    (source
++      (origin
++        (method url-fetch)
++        (uri (crate-uri "gtk-sys" version))
++        (file-name
++          (string-append name "-" version ".tar.gz"))
++        (sha256
++          (base32
++            "113wp3x7xh2zjv8i5pn3mcz77yr5zq8wm8260bv4g8nbhw2jzg6m"))))
++    (build-system cargo-build-system)
++    (arguments
++      `(#:cargo-inputs
++        (("rust-atk-sys" ,rust-atk-sys-0.15)
++         ("rust-cairo-sys-rs" ,rust-cairo-sys-rs-0.20)
++         ("rust-gdk-pixbuf-sys" ,rust-gdk-pixbuf-sys-0.15)
++         ("rust-gdk-sys" ,rust-gdk-sys-0.15)
++         ("rust-gio-sys" ,rust-gio-sys-0.15)
++         ("rust-glib-sys" ,rust-glib-sys-0.15)
++         ("rust-gobject-sys" ,rust-gobject-sys-0.15)
++         ("rust-libc" ,rust-libc-0.2)
++         ("rust-pango-sys" ,rust-pango-sys-0.15)
++         ("rust-system-deps" ,rust-system-deps-6))))
++    (home-page "https://gtk-rs.org/")
++    (synopsis "FFI bindings to libgtk-3")
++    (description
++      "This package provides FFI bindings to libgtk-3.")
++    (license license:expat)))
++
+ (define-public rust-gtk-sys-0.14
+   (package
+     (inherit rust-gtk-sys-0.18)
+-- 
+2.46.0
+

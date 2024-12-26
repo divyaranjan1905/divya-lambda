@@ -1,0 +1,56 @@
+From 5d3f25e9fe167c8a9d5d7238ce63340678409fb6 Mon Sep 17 00:00:00 2001
+From: Divya Ranjan <divya@subvertising.org>
+Date: Wed, 11 Dec 2024 01:04:15 +0000
+Subject: [PATCH 05/10] gnu: Add rust-gsk4-sys-0.4.
+
+* gnu/packages/crates-gtk.scm (rust-gsk4-sys-0.4): New variable.
+
+Change-Id: If4b70c19f3a409e8aad79748b74930492bfdd05b
+---
+ gnu/packages/crates-gtk.scm | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+
+diff --git a/gnu/packages/crates-gtk.scm b/gnu/packages/crates-gtk.scm
+index b1b8115ea8..b7c650a10c 100644
+--- a/gnu/packages/crates-gtk.scm
++++ b/gnu/packages/crates-gtk.scm
+@@ -3123,6 +3123,36 @@ (define-public rust-gsk4-sys-0.7
+        #:cargo-development-inputs (("rust-shell-words" ,rust-shell-words-1)
+                                    ("rust-tempfile" ,rust-tempfile-3))))))
+ 
++(define-public rust-gsk4-sys-0.4
++  (package
++    (name "rust-gsk4-sys")
++    (version "0.4.8")
++    (source
++      (origin
++        (method url-fetch)
++        (uri (crate-uri "gsk4-sys" version))
++        (file-name
++          (string-append name "-" version ".tar.gz"))
++        (sha256
++          (base32
++	    "1sizv9dy5ch1nxmfmdb3xm35q10zr7fa4hw6hf650y00yv63kpbs"))))
++    (build-system cargo-build-system)
++    (arguments
++      `(#:cargo-inputs
++        (("rust-cairo-sys-rs" ,rust-cairo-sys-rs-0.20)
++         ("rust-gdk4-sys" ,rust-gdk4-sys-0.4)
++         ("rust-glib-sys" ,rust-glib-sys-0.15)
++         ("rust-gobject-sys" ,rust-gobject-sys-0.15)
++         ("rust-graphene-sys" ,rust-graphene-sys-0.15)
++         ("rust-libc" ,rust-libc-0.2)
++         ("rust-pango-sys" ,rust-pango-sys-0.15)
++         ("rust-system-deps" ,rust-system-deps-6))))
++    (home-page "https://gtk-rs.org/gtk4-rs")
++    (synopsis "FFI bindings of GSK 4")
++    (description
++      "This package provides FFI bindings of GSK 4.")
++    (license license:expat)))
++
+ (define-public rust-gst-plugin-version-helper-0.8
+   (package
+     (name "rust-gst-plugin-version-helper")
+-- 
+2.46.0
+

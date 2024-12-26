@@ -1,0 +1,39 @@
+From 024b7df28683c68ce109f6fc7c5010453bcfbc53 Mon Sep 17 00:00:00 2001
+From: Divya Ranjan <divya@subvertising.org>
+Date: Thu, 26 Dec 2024 17:53:10 +0000
+Subject: [PATCH] gnu: Add emacs-lucid.
+
+* gnu/packages/emacs.scm (emacs-lucid): New variable.
+---
+ gnu/packages/emacs.scm | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/gnu/packages/emacs.scm b/gnu/packages/emacs.scm
+index c5b57211dd..1628bde99c 100644
+--- a/gnu/packages/emacs.scm
++++ b/gnu/packages/emacs.scm
+@@ -525,6 +525,21 @@ (define-public emacs-pgtk-xwidgets
+      (modify-inputs (package-inputs emacs-pgtk)
+        (prepend gsettings-desktop-schemas webkitgtk-with-libsoup2)))))
+ 
++(define-public emacs-lucid
++  (package/inherit emacs-no-x
++    (name "emacs-lucid")
++    (synopsis
++     "The extensible, customizable, self-documenting text editor (with Lucid toolkit)")
++    (inputs (modify-inputs (package-inputs emacs)
++              (delete gtk+)
++              (prepend libxaw)))
++    (arguments
++     (substitute-keyword-arguments
++         (package-arguments emacs-no-x)
++       ((#:configure-flags flags #~'())
++        #~(cons "--with-x-toolkit=lucid"
++                #$flags))))))
++
+ (define-public emacs-motif
+   (package/inherit emacs-no-x
+     (name "emacs-motif")
+-- 
+2.46.0
+
