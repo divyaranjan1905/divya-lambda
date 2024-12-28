@@ -149,8 +149,20 @@
         #~(cons "--with-x-toolkit=lucid"
                 #$flags))))))
 
+(define-public emacs-master-no-x-toolkit
+  (emacs->emacs-master emacs-no-x-toolkit))
+
+(define-public emacs-master (emacs->emacs-master emacs))
+(define-public emacs-master-xwidgets (emacs->emacs-master emacs-xwidgets))
+
+;; PGTK
+(define-public emacs-master-pgtk (emacs->emacs-master emacs-pgtk))
+(define-public emacs-master-pgtk-xwidgets
+  (emacs->emacs-master emacs-pgtk-xwidgets))
+
+;; Motif
+(define-public emacs-master-motif (emacs->emacs-master emacs-motif))
+
+;; Lucid
 (define-public emacs-master-lucid
   (emacs->emacs-master emacs-lucid))
-
-
-emacs-master
