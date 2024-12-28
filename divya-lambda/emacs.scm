@@ -34,7 +34,7 @@
   (package
     (inherit emacs-next-minimal)
     (name "emacs-master-minimal")
-    (version (git-version "31.1" emacs-master-time emacs-master-commit))
+    (version (git-version "31.0.50" emacs-master-time emacs-master-commit))
     (source
      (origin
        (method url-fetch)
