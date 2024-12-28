@@ -25,10 +25,12 @@ Here are the packages that are publicly available from the channel:
 ** Audio
 =(divya-lambda audio):=
 - =jack-mixer= ([[https://git.savannah.gnu.org/cgit/guix.git/commit/?id=07cd046c209f192032b425d2ee44f6025bff63a1][Merged]] upstream)
+
   https://github.com/jack-mixer/jack_mixer
 ** Video
 =(divya-lambda video):=
 - =blue-recorder= ([[https://issues.guix.gnu.org/74432][Sent]] upstream)
+
   https://github.com/xlmnxp/blue-recorder
 ** Emacs
 =(divya-lambda emacs):=
