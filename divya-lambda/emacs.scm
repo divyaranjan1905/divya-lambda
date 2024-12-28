@@ -133,7 +133,36 @@
                  (format #f "(or ~a (tramp-compat-process-running-p ~s))"
                          all (string-append "." process "-real"))))))))))))
 
+(define-public emacs-master-no-x-toolkit
+  (emacs->emacs-master emacs-no-x-toolkit))
 
+(define-public emacs-master (emacs->emacs-master emacs))
+
+(define-public emacs-master-xwidgets (emacs->emacs-master emacs-xwidgets))
+
+;; New Garbage Collector branch for testing
+(define-public emacs-master-igc
+  (package
+    (inherit emacs-master)
+    (name "emacs-master-igc")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+	     (url "https://git.savannah.gnu.org/git/emacs.git")
+	     (commit "6225610e8af02ece7ef15d182d83f21997197334")))
+       (sha256 (base32 "03v7mvpm79mi2nv4y35ysa7v25mmm4s6qcbx0rksz9520xdgf78i"))
+       (patches (origin-patches (package-source emacs-master-minimal)))))))
+
+;; PGTK
+(define-public emacs-master-pgtk (emacs->emacs-master emacs-pgtk))
+(define-public emacs-master-pgtk-xwidgets
+  (emacs->emacs-master emacs-pgtk-xwidgets))
+
+;; Motif
+(define-public emacs-master-motif (emacs->emacs-master emacs-motif))
+
+;; Lucid
 (define-public emacs-lucid
   (package/inherit emacs-no-x
     (name "emacs-lucid")
@@ -149,20 +178,5 @@
         #~(cons "--with-x-toolkit=lucid"
                 #$flags))))))
 
-(define-public emacs-master-no-x-toolkit
-  (emacs->emacs-master emacs-no-x-toolkit))
-
-(define-public emacs-master (emacs->emacs-master emacs))
-(define-public emacs-master-xwidgets (emacs->emacs-master emacs-xwidgets))
-
-;; PGTK
-(define-public emacs-master-pgtk (emacs->emacs-master emacs-pgtk))
-(define-public emacs-master-pgtk-xwidgets
-  (emacs->emacs-master emacs-pgtk-xwidgets))
-
-;; Motif
-(define-public emacs-master-motif (emacs->emacs-master emacs-motif))
-
-;; Lucid
 (define-public emacs-master-lucid
   (emacs->emacs-master emacs-lucid))
