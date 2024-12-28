@@ -21,7 +21,8 @@
   (gnu packages gtk))
 
 
-;; Updated from emacs-master channel: https://codeberg.org/akib/guix-channel-emacs-master/src/branch/master/emacs-master.scm
+;; Updated from emacs-master channel:
+;; https://codeberg.org/akib/guix-channel-emacs-master/src/branch/master/emacs-master.scm
 
 ;;; !!! EMACS COMMIT AND HASH BEGIN !!!
 (define emacs-master-commit "ab3888515694f89a24f64e94292c578af86eeaee")
