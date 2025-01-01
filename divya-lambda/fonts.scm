@@ -58,19 +58,19 @@ traps, which blossom into view when set at larger sizes.")
 
 (define-public font-spline-sans-mono
   (let ((commit "b167db03b7d7ae754bf7071c13415e7aeee7d073")
-	(revision "0"))
+        (revision "0"))
     (package
       (name "font-spline-sans-mono")
       (version (git-version "0.0.0" revision commit))
       (source
        (origin
-	 (method git-fetch)
-	 (uri (git-reference
-	       (url "https://github.com/SorkinType/SplineSansMono")
-	       (commit commit)))
-	 (file-name (git-file-name name version))
-	 (sha256
-	  (base32 "0lrckl39ivklxk3cfd761lsghwdx68yyvcmkrij9s54cp0hvnl63"))))
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/SorkinType/SplineSansMono")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "10ymg4mrihyfidwcszf4aiw2jlhm4j1sdmyybcmqmhx0pbzalkv1"))))
       (build-system font-build-system)
       (home-page "https://fonts.google.com/specimen/Spline+Sans+Mono")
       (synopsis
@@ -80,3 +80,10 @@ traps, which blossom into view when set at larger sizes.")
 checkout processes, and programming.  Space efficiency is accomplished by condensing
 traditional grotesque proportions.")
       (license license:silofl1.1))))
+
+;; (define-public font-elstob
+;;   (package
+;;     (name "font-elsob")
+;;     (version "3.001")
+;;     (source )))
+font-spline-sans-mono
