@@ -190,7 +190,8 @@
   (package/inherit emacs-no-x
     (name "emacs-lucid")
     (synopsis
-     "The extensible, customizable, self-documenting text editor (with Lucid toolkit)")
+     "The extensible, customizable, self-documenting text editor
+(with Lucid toolkit)")
     (inputs (modify-inputs (package-inputs emacs)
               (delete gtk+)
               (prepend libxaw)))
