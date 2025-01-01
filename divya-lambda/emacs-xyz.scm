@@ -35,18 +35,21 @@
 (define-public emacs-binder
   (package
     (name "emacs-binder")
-    (version "20241023.1154")
+    (version "0.5.0")
     (source
      (origin
-       (method url-fetch)
-       (uri (string-append "https://melpa.org/packages/binder-" version ".tar"))
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://codeberg.org/divyaranjan/binder")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
        (sha256
-        (base32 "1nvsmmg9wwan5y38dpcpffzxxvivi4708ri64f03gwcq66g1k49m"))))
+        "1fdgl31zc15cysv1yys95j0106i2fwfxb3qcwwh7f3mcz2snr2md")))
     (build-system emacs-build-system)
     (home-page "https://codeberg.org/divyaranjan/binder")
     (synopsis
      "Binder is a global minor mode to facilitate working on multiple files")
-    (description "Primarily, Binder provides a global minor mode binder-mode.
-This allows working with files in the current binder-project-directory.
-Data concerning these files is saved in a .binder.el file in the project directory.")
+    (description
+     "Primarily, Binder provides a global minor mode Binder Mode.
+This allows working with files in the current @code{binder-project-directory}.")
     (license license:gpl3+)))
