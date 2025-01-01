@@ -43,6 +43,11 @@ Here are the packages that are publicly available from the channel:
 =(divya-lambda emacs-xyz):=
 - =emacs-binder= ([[https://lists.gnu.org/archive/html/guix-patches/2025-01/msg00016.html][Sent]] upstream)
 
+** Fonts
+=(divya-lambda fonts):=
+- =font-spline-sans=
+* Patches
+The patches for all/most of the packages in this channel that were sent to upstream Guix can also be found in the =patches/= directory.
 * Other Channels
 These are some other interesting channels worth checking out:
 
