@@ -55,3 +55,28 @@ and paragraphs of text.  Space efficiency is accomplished by condensing traditio
 grotesque proportions.  The cool and restrained tone is accented with strategic \"thorn\"
 traps, which blossom into view when set at larger sizes.")
       (license license:silofl1.1))))
+
+(define-public font-spline-sans-mono
+  (let ((commit "b167db03b7d7ae754bf7071c13415e7aeee7d073")
+	(revision "0"))
+    (package
+      (name "font-spline-sans-mono")
+      (version (git-version "0.0.0" revision commit))
+      (source
+       (origin
+	 (method git-fetch)
+	 (uri (git-reference
+	       (url "https://github.com/SorkinType/SplineSansMono")
+	       (commit commit)))
+	 (file-name (git-file-name name version))
+	 (sha256
+	  (base32 "0lrckl39ivklxk3cfd761lsghwdx68yyvcmkrij9s54cp0hvnl63"))))
+      (build-system font-build-system)
+      (home-page "https://fonts.google.com/specimen/Spline+Sans+Mono")
+      (synopsis
+       "Monospaced Grotesque purpose-built for UI interfaces, and programming")
+      (description
+       "Spline Sans Mono is a Monospaced Grotesque purpose-built for UI interfaces,
+checkout processes, and programming.  Space efficiency is accomplished by condensing
+traditional grotesque proportions.")
+      (license license:silofl1.1))))
