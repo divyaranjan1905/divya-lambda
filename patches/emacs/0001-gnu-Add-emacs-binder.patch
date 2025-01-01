@@ -1,0 +1,43 @@
+From 7dce0b6e71ce10f8b00b5806132b3bb3fff14a4e Mon Sep 17 00:00:00 2001
+From: Divya Ranjan <divya@subvertising.org>
+Date: Wed, 1 Jan 2025 15:18:44 +0000
+Subject: [PATCH] gnu: Add emacs-binder.
+
+* gnu/packages/emacs-xyz.scm (emacs-binder): New variable.
+---
+ gnu/packages/emacs-xyz.scm | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/gnu/packages/emacs-xyz.scm b/gnu/packages/emacs-xyz.scm
+index 4e4ac5d4c4..73b6ad72b9 100644
+--- a/gnu/packages/emacs-xyz.scm
++++ b/gnu/packages/emacs-xyz.scm
+@@ -39712,6 +39712,25 @@ (define-public emacs-iter2
+ original package.")
+     (license license:gpl3+)))
+ 
++(define-public emacs-binder
++  (package
++    (name "emacs-binder")
++    (version "20241023.1154")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (string-append "https://melpa.org/packages/binder-" version ".tar"))
++       (sha256
++        (base32 "1nvsmmg9wwan5y38dpcpffzxxvivi4708ri64f03gwcq66g1k49m"))))
++    (build-system emacs-build-system)
++    (home-page "https://codeberg.org/divyaranjan/binder")
++    (synopsis
++     "Binder is a global minor mode to facilitate working on multiple files")
++    (description "Primarily, Binder provides a global minor mode binder-mode.
++This allows working with files in the current binder-project-directory.
++Data concerning these files is saved in a .binder.el file in the project directory.")
++    (license license:gpl3+)))
++
+ (define-public emacs-bind-map
+   (let ((commit "510a24138d8de3b8df0783f1ac493a551fc9bd74")
+         (revision "0"))
+-- 
+2.47.1
+
