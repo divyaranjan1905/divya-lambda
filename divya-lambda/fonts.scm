@@ -26,9 +26,7 @@
   #:use-module (guix download)
   #:use-module (guix build-system font)
   #:use-module
-  ((guix licenses) #:prefix license:)
-
-  #:use-module (gnu packages gtk))
+  ((guix licenses) #:prefix license:))
 
 (define-public font-spline-sans
   (let ((commit "5196436e0714c188c70f30a93b4759e8ed8afb69")
