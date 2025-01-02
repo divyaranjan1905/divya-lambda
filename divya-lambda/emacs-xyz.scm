@@ -28,9 +28,7 @@
   #:use-module
   ((guix licenses) #:prefix license:)
 
-  #:use-module (gnu packages xorg)
-  #:use-module (gnu packages emacs)
-  #:use-module (gnu packages gtk))
+  #:use-module (gnu packages emacs))
 
 (define-public emacs-binder
   (package
