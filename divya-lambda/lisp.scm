@@ -325,6 +325,3 @@ statistical profiler, a code coverage tool, and many other extensions.")
     ;; loop macro has its own license.  See COPYING file for further notes.
     (license (list license:public-domain license:bsd-2
                    (license:x11-style "file://src/code/loop.lisp")))))
-
-
-sbcl

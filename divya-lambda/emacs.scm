@@ -203,5 +203,3 @@
 
 (define-public emacs-master-lucid
   (emacs->emacs-master emacs-lucid))
-
-emacs-master-lucid
