@@ -1524,14 +1524,22 @@ scripts.")
     (version "0.10.2")
     (source
      (origin
-       (method url-fetch)
-       (uri (crate-uri "bottom" version))
-       (file-name (string-append name "-" version ".tar.gz"))
+       (method git-fetch)
+       (uri (git-reference
+	     (url "https://github.com/ClementTsang/bottom/")
+	     (commit "2ec1fb56c9db0b37acc4eca3230adfb52720376b"
+		     ;;"dbda1ee56f47ccbf517f21af9bd69ea3f6819fe9"
+	      )))
+       (file-name (git-file-name name version))
        (sha256
-        (base32 "0y9wjbzrmcvh0fvfr5cizzwzy6f18hagk970mljwhccrwdsbaapg"))))
+        (base32 "12g4r527hj43gb8vymap4ysrjdwg5f8vvrbpshvywnz2vxyifvc6"))))
     (build-system cargo-build-system)
     (arguments
      `(#:cargo-build-flags '("--release")
+       ;; #:phases ,#~(modify-phases %standard-phases
+       ;; 		     (add-after 'build 'fail
+       ;; 		       (lambda _
+       ;; 			 (/ 0 0))))
        #:cargo-inputs (("rust-anyhow" ,rust-anyhow-1)
                        ("rust-backtrace" ,rust-backtrace-0.3)
                        ("rust-cfg-if" ,rust-cfg-if-1)
