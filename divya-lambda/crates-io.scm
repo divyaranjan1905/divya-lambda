@@ -17,6 +17,24 @@
 ;;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;;
 ;;; Rust crates related to IO
+(define-module (divya-lambda crates-io)
+  #:use-module (guix packages)
+  #:use-module (guix utils)
+  #:use-module (guix gexp)
+  #:use-module (guix git-download)
+  #:use-module (guix download)
+  #:use-module (guix build-system cargo)
+
+  #:use-module (gnu packages shells)
+  #:use-module (gnu packages crates-io)
+  #:use-module (gnu packages crates-web)
+  #:use-module (gnu packages crates-crypto)
+  #:use-module (gnu packages crates-tls)
+  #:use-module (gnu packages crates-vcs)
+  #:use-module (gnu packages crates-windows)
+  #:use-module (gnu packages crates-apple)
+  #:use-module (gnu packages crates-graphics)
+  #:use-module ((guix licenses) #:prefix license:))
 
 (define-public rust-serial-windows-0.4
   (package
