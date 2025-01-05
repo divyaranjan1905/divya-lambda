@@ -25,6 +25,8 @@
   #:use-module (guix download)
   #:use-module (guix build-system cargo)
 
+  #:use-module (divya-lambda crate-io)
+
   #:use-module (gnu packages shells)
   #:use-module (gnu packages crates-io)
   #:use-module (gnu packages crates-web)
