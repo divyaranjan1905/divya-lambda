@@ -1,0 +1,59 @@
+From 7a897dafc7ddc4c5572b4bd35b2379c7699b5f4a Mon Sep 17 00:00:00 2001
+Message-ID: <7a897dafc7ddc4c5572b4bd35b2379c7699b5f4a.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 20:46:04 +0000
+Subject: [PATCH 08/44] gnu: Add rust-starship-battery-0.9.
+
+* gnu/packages/crates-io.scm (rust-starship-battery-0.9): New variable.
+---
+ gnu/packages/crates-io.scm | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 7bc02de2dc..9a0d0a3e63 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -74277,6 +74277,38 @@ (define-public rust-standback-0.2
+     (description "New standard library, old compiler.")
+     (license (list license:expat license:asl2.0))))
+ 
++(define-public rust-starship-battery-0.9
++  (package
++    (name "rust-starship-battery")
++    (version "0.9.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "starship-battery" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0gzldhpfhqh12wgrahfdl2vma3qmrv434c4xcj7qndclcxs1ayfs"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-cfg-if" ,rust-cfg-if-1)
++                       ("rust-core-foundation" ,rust-core-foundation-0.9)
++                       ("rust-lazycell" ,rust-lazycell-1)
++                       ("rust-libc" ,rust-libc-0.2)
++                       ("rust-libc" ,rust-libc-0.2)
++                       ("rust-mach2" ,rust-mach2-0.4)
++                       ("rust-nix" ,rust-nix-0.29)
++                       ("rust-num-traits" ,rust-num-traits-0.2)
++                       ("rust-plist" ,rust-plist-1)
++                       ("rust-schemars" ,rust-schemars-0.8)
++                       ("rust-serde" ,rust-serde-1)
++                       ("rust-uom" ,rust-uom-0.36)
++                       ("rust-winapi" ,rust-winapi-0.3))))
++    (home-page "https://github.com/starship/rust-battery")
++    (synopsis "Cross-platform information about the notebook batteries")
++    (description
++     "This package provides Cross-platform information about the notebook batteries.")
++    (license license:isc)))
++
+ (define-public rust-starship-battery-0.10
+   (package
+     (name "rust-starship-battery")
+-- 
+2.47.1
+

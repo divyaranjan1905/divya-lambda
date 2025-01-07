@@ -1,0 +1,50 @@
+From be2f44e5be6707aa5f452c435c8facf83c7fd115 Mon Sep 17 00:00:00 2001
+Message-ID: <be2f44e5be6707aa5f452c435c8facf83c7fd115.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 20:47:45 +0000
+Subject: [PATCH 09/44] gnu: Add rust-stability-0.2.
+
+* gnu/packages/crates-io.scm (rust-stability-0.2): New variable.
+
+Change-Id: Idea9a4b7ae95c4bb9a366ee5804abe2f5163c690
+---
+ gnu/packages/crates-io.scm | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 9a0d0a3e63..ab4f50cca7 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -74163,6 +74163,27 @@ (define-public rust-st-map-0.1
+     (description "This package provides a runtime for a stack-alocated map.")
+     (license license:expat)))
+ 
++(define-public rust-stability-0.2
++  (package
++    (name "rust-stability")
++    (version "0.2.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "stability" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1b7w6qknq0w5y7s358j62pzi9kbh6g73lal3jx9aydpikl0ff16r"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-quote" ,rust-quote-1)
++                       ("rust-syn" ,rust-syn-2))))
++    (home-page "https://github.com/sagebind/stability")
++    (synopsis "Rust API stability attributes for the rest of us")
++    (description
++     "This package provides Rust API stability attributes for the rest of us.")
++    (license license:expat)))
++
+ (define-public rust-stability-0.1
+   (package
+     (name "rust-stability")
+-- 
+2.47.1
+

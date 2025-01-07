@@ -1,0 +1,64 @@
+From 73e671aef2515f7a30d0a8e4f852d0ecbcd84274 Mon Sep 17 00:00:00 2001
+Message-ID: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Cc: Efraim Flashner <efraim@flashner.co.il>
+Date: Sun, 5 Jan 2025 06:51:58 +0000
+Subject: [PATCH 00/44] Add rust-bottom-0.10
+
+This patch series adds a Rust top-like system monitor for the terminal.  I've tried to only add the crates that are _necessary_ for the package to build.
+
+Divya Ranjan (44):
+  gnu: Add rust-serial-core-0.4.
+  gnu: Add rust-serial-windows-0.4.
+  gnu: Add rust-serial-unix-0.4.
+  gnu: Add rust-termios-0.2.
+  gnu: Add rust-ioctl-rs-0.1.
+  gnu: Add rust-portable-pty-0.8.
+  gnu: Add rust-unicode-ellipsis-0.2.
+  gnu: Add rust-starship-battery-0.9.
+  gnu: Add rust-stability-0.2.
+  gnu: rust-sysinfo: Update to 0.30.13.
+  gnu: Add rust-ratatui-0.27.
+  gnu: Add rust-wrapcenum-derive-0.4.
+  gnu: Add rust-nvml-wrapper-0.10.
+  gnu: Add rust-nvml-wrapper-sys-0.8.
+  gnu: Add rust-nu-cli-0.88.
+  gnu: Add rust-concat-string-1.
+  gnu: Add rust-nu-cmd-base-0.88.
+  gnu: Add rust-nu-cmd-lang-0.88.
+  gnu: Add rust-nu-command-0.88.
+  gnu: Add rust-nu-color-config-0.88.
+  gnu: Add rust-nu-engine-0.88.
+  gnu: Add rust-nu-glob-0.88.
+  gnu: Add rust-nu-json-0.88.
+  gnu: Add rust-nu-parser-0.88.
+  gnu: Add rust-nu-path-0.88.
+  gnu: Add rust-nu-plugin-0.88.
+  gnu: Add rust-nu-pretty-hex-0.88.
+  gnu: Add rust-nu-protocol-0.88.
+  gnu: Add rust-calamine-0.22.
+  gnu: Add rust-nu-system-0.88.
+  gnu: Add rust-nu-table-0.88.
+  gnu: Add rust-nu-term-grid-0.88.
+  gnu: Add rust-nu-test-support-0.88.
+  gnu: Add rust-tzdb-0.5.
+  gnu: Add rust-xcb-0.8.
+  gnu: Add rust-shadow-rs-0.24.
+  gnu: Add rust-x11-clipboard-0.3.
+  gnu: Add rust-clipboard-win-2.
+  gnu: Add rust-clipboard-0.5.
+  gnu: Add rust-reedline-0.27.
+  gnu: Add rust-lscolors-0.15.
+  gnu: Add rust-nu-utils-0.88.
+  gnu: rust-clap-complete-nushell-4: Update to 4.5.5.
+  gnu: Add rust-bottom-0.10.
+
+ gnu/packages/crates-io.scm | 1148 +++++++++++++++++++++++++++++++++++-
+ gnu/packages/rust-apps.scm |   69 +++
+ 2 files changed, 1197 insertions(+), 20 deletions(-)
+
+
+base-commit: bb6e1d6effd9788c5c80426b40189f2aeeb49d92
+prerequisite-patch-id: 7ad4a2e248e8a5773c67b2861d2eeddb98942d53
+--
+2.47.1

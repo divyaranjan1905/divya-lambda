@@ -1,0 +1,136 @@
+From eee7624fec39bd0b705d09e55e84f0336e005249 Mon Sep 17 00:00:00 2001
+Message-ID: <eee7624fec39bd0b705d09e55e84f0336e005249.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:15:23 +0000
+Subject: [PATCH 19/44] gnu: Add rust-nu-command-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-command-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 109 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 109 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 9e2aa31ba8..9252e6d575 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47153,6 +47153,115 @@ (define-public rust-nu-cmd-lang-0.88
+     (description "This package provides Nushell's core language commands.")
+     (license license:expat)))
+ 
++(define-public rust-nu-command-0.88
++  (package
++    (name "rust-nu-command")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-command" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0vsdj1sx0kfr4cql5l44hbiqkqcf0v63i6nbhl2dma933nzc98yf"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-alphanumeric-sort" ,rust-alphanumeric-sort-1)
++                       ("rust-base64" ,rust-base64-0.21)
++                       ("rust-bracoxide" ,rust-bracoxide-0.1)
++                       ("rust-byteorder" ,rust-byteorder-1)
++                       ("rust-bytesize" ,rust-bytesize-1)
++                       ("rust-calamine" ,rust-calamine-0.22)
++                       ("rust-chardetng" ,rust-chardetng-0.1)
++                       ("rust-chrono" ,rust-chrono-0.4)
++                       ("rust-chrono-humanize" ,rust-chrono-humanize-0.2)
++                       ("rust-chrono-tz" ,rust-chrono-tz-0.8)
++                       ("rust-crossterm" ,rust-crossterm-0.27)
++                       ("rust-csv" ,rust-csv-1)
++                       ("rust-dialoguer" ,rust-dialoguer-0.11)
++                       ("rust-digest" ,rust-digest-0.10)
++                       ("rust-dtparse" ,rust-dtparse-2)
++                       ("rust-encoding-rs" ,rust-encoding-rs-0.8)
++                       ("rust-fancy-regex" ,rust-fancy-regex-0.11)
++                       ("rust-filesize" ,rust-filesize-0.2)
++                       ("rust-filetime" ,rust-filetime-0.2)
++                       ("rust-fs-extra" ,rust-fs-extra-1)
++                       ("rust-htmlescape" ,rust-htmlescape-0.3)
++                       ("rust-human-date-parser" ,rust-human-date-parser-0.1)
++                       ("rust-indexmap" ,rust-indexmap-2)
++                       ("rust-indicatif" ,rust-indicatif-0.17)
++                       ("rust-itertools" ,rust-itertools-0.11)
++                       ("rust-libc" ,rust-libc-0.2)
++                       ("rust-log" ,rust-log-0.4)
++                       ("rust-lscolors" ,rust-lscolors-0.15)
++                       ("rust-md-5" ,rust-md-5-0.10)
++                       ("rust-miette" ,rust-miette-5)
++                       ("rust-mime" ,rust-mime-0.3)
++                       ("rust-mime-guess" ,rust-mime-guess-2)
++                       ("rust-native-tls" ,rust-native-tls-0.2)
++                       ("rust-nix" ,rust-nix-0.27)
++                       ("rust-notify-debouncer-full" ,rust-notify-debouncer-full-0.3)
++                       ("rust-nu-ansi-term" ,rust-nu-ansi-term-0.49)
++                       ("rust-nu-cmd-base" ,rust-nu-cmd-base-0.88)
++                       ("rust-nu-color-config" ,rust-nu-color-config-0.88)
++                       ("rust-nu-engine" ,rust-nu-engine-0.88)
++                       ("rust-nu-glob" ,rust-nu-glob-0.88)
++                       ("rust-nu-json" ,rust-nu-json-0.88)
++                       ("rust-nu-parser" ,rust-nu-parser-0.88)
++                       ("rust-nu-path" ,rust-nu-path-0.88)
++                       ("rust-nu-pretty-hex" ,rust-nu-pretty-hex-0.88)
++                       ("rust-nu-protocol" ,rust-nu-protocol-0.88)
++                       ("rust-nu-system" ,rust-nu-system-0.88)
++                       ("rust-nu-table" ,rust-nu-table-0.88)
++                       ("rust-nu-term-grid" ,rust-nu-term-grid-0.88)
++                       ("rust-nu-utils" ,rust-nu-utils-0.88)
++                       ("rust-num" ,rust-num-0.4)
++                       ("rust-num-format" ,rust-num-format-0.4)
++                       ("rust-num-traits" ,rust-num-traits-0.2)
++                       ("rust-once-cell" ,rust-once-cell-1)
++                       ("rust-open" ,rust-open-5)
++                       ("rust-os-pipe" ,rust-os-pipe-1)
++                       ("rust-pathdiff" ,rust-pathdiff-0.2)
++                       ("rust-percent-encoding" ,rust-percent-encoding-2)
++                       ("rust-print-positions" ,rust-print-positions-0.6)
++                       ("rust-procfs" ,rust-procfs-0.16)
++                       ("rust-quick-xml" ,rust-quick-xml-0.30)
++                       ("rust-rand" ,rust-rand-0.8)
++                       ("rust-rayon" ,rust-rayon-1)
++                       ("rust-regex" ,rust-regex-1)
++                       ("rust-roxmltree" ,rust-roxmltree-0.18)
++                       ("rust-rusqlite" ,rust-rusqlite-0.29)
++                       ("rust-same-file" ,rust-same-file-1)
++                       ("rust-serde" ,rust-serde-1)
++                       ("rust-serde-json" ,rust-serde-json-1)
++                       ("rust-serde-urlencoded" ,rust-serde-urlencoded-0.7)
++                       ("rust-serde-yaml" ,rust-serde-yaml-0.9)
++                       ("rust-sha2" ,rust-sha2-0.10)
++                       ("rust-sysinfo" ,rust-sysinfo-0.29)
++                       ("rust-tabled" ,rust-tabled-0.14)
++                       ("rust-terminal-size" ,rust-terminal-size-0.3)
++                       ("rust-titlecase" ,rust-titlecase-2)
++                       ("rust-toml" ,rust-toml-0.8)
++                       ("rust-trash" ,rust-trash-3)
++                       ("rust-umask" ,rust-umask-2)
++                       ("rust-unicode-segmentation" ,rust-unicode-segmentation-1)
++                       ("rust-ureq" ,rust-ureq-2)
++                       ("rust-url" ,rust-url-2)
++                       ("rust-uu-cp" ,rust-uu-cp-0.0.23)
++                       ("rust-uu-mkdir" ,rust-uu-mkdir-0.0.23)
++                       ("rust-uu-mktemp" ,rust-uu-mktemp-0.0.23)
++                       ("rust-uu-whoami" ,rust-uu-whoami-0.0.23)
++                       ("rust-uuid" ,rust-uuid-1)
++                       ("rust-wax" ,rust-wax-0.6)
++                       ("rust-which" ,rust-which-5)
++                       ("rust-windows" ,rust-windows-0.48)
++                       ("rust-winreg" ,rust-winreg-0.52))))
++    (home-page
++     "https://github.com/nushell/nushell/tree/main/crates/nu-command")
++    (synopsis "Nushell's built-in commands")
++    (description "This package provides Nushell's built-in commands.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

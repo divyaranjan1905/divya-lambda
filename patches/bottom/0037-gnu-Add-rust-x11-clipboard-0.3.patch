@@ -1,0 +1,46 @@
+From fae6df9d16120bf9c6ad07e480148efa6e814889 Mon Sep 17 00:00:00 2001
+Message-ID: <fae6df9d16120bf9c6ad07e480148efa6e814889.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:34:57 +0000
+Subject: [PATCH 37/44] gnu: Add rust-x11-clipboard-0.3.
+
+* gnu/packages/crates-io.scm (rust-x11-clipboard-0.3): New variable.
+---
+ gnu/packages/crates-io.scm | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index af044f8ee3..27cd4e2623 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -92786,6 +92786,25 @@ (define-public rust-wyz-0.2
+      "This package provides a collection of utility functions.")
+     (license license:expat)))
+ 
++(define-public rust-x11-clipboard-0.3
++  (package
++    (name "rust-x11-clipboard")
++    (version "0.3.3")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "x11-clipboard" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1smwyr23jns0dncm6bwv00xfxxy99bv6qlx6df7dkdcydk04kgc9"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-xcb" ,rust-xcb-0.8))))
++    (home-page "https://github.com/quininer/x11-clipboard")
++    (synopsis "x11 clipboard support for Rust")
++    (description "This package provides x11 clipboard support for Rust.")
++    (license license:expat)))
++
+ (define-public rust-x86-0.52
+   (package
+     (name "rust-x86")
+-- 
+2.47.1
+

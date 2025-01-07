@@ -1,0 +1,53 @@
+From 5c061e819668239f7b6cfa799d0fdfaad84e2c30 Mon Sep 17 00:00:00 2001
+Message-ID: <5c061e819668239f7b6cfa799d0fdfaad84e2c30.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:15:56 +0000
+Subject: [PATCH 20/44] gnu: Add rust-nu-color-config-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-color-config-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 9252e6d575..5921807627 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47262,6 +47262,32 @@ (define-public rust-nu-command-0.88
+     (description "This package provides Nushell's built-in commands.")
+     (license license:expat)))
+ 
++(define-public rust-nu-color-config-0.88
++  (package
++    (name "rust-nu-color-config")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-color-config" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0byaa3wmh584pgrvvsxsxagif4mnmd2j4qllxb841hr1wd5klw03"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-nu-ansi-term" ,rust-nu-ansi-term-0.49)
++                       ("rust-nu-engine" ,rust-nu-engine-0.88)
++                       ("rust-nu-json" ,rust-nu-json-0.88)
++                       ("rust-nu-protocol" ,rust-nu-protocol-0.88)
++                       ("rust-nu-utils" ,rust-nu-utils-0.88)
++                       ("rust-serde" ,rust-serde-1))))
++    (home-page
++     "https://github.com/nushell/nushell/tree/main/crates/nu-color-config")
++    (synopsis "Color configuration code used by Nushell")
++    (description
++     "This package provides Color configuration code used by Nushell.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

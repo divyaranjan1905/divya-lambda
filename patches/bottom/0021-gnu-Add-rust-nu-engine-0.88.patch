@@ -1,0 +1,49 @@
+From 1c4ed60861dd898fdde04ea2877089f191ff09e7 Mon Sep 17 00:00:00 2001
+Message-ID: <1c4ed60861dd898fdde04ea2877089f191ff09e7.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:16:15 +0000
+Subject: [PATCH 21/44] gnu: Add rust-nu-engine-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-engine-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 5921807627..19a18e04fb 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47288,6 +47288,28 @@ (define-public rust-nu-color-config-0.88
+      "This package provides Color configuration code used by Nushell.")
+     (license license:expat)))
+ 
++(define-public rust-nu-engine-0.88
++  (package
++    (name "rust-nu-engine")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-engine" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "12vwwamp78qwbnnw06572ya8z6abjjjrg7md3g5qj789bhh4j5gk"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-nu-glob" ,rust-nu-glob-0.88)
++                       ("rust-nu-path" ,rust-nu-path-0.88)
++                       ("rust-nu-protocol" ,rust-nu-protocol-0.88)
++                       ("rust-nu-utils" ,rust-nu-utils-0.88))))
++    (home-page "https://github.com/nushell/nushell/tree/main/crates/nu-engine")
++    (synopsis "Nushell's evaluation engine")
++    (description "This package provides Nushell's evaluation engine.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

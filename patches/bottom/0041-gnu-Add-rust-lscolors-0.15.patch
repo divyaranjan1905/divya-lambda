@@ -1,0 +1,49 @@
+From 9e94d4192d57fd97272f6a78ba8515a349acb99a Mon Sep 17 00:00:00 2001
+Message-ID: <9e94d4192d57fd97272f6a78ba8515a349acb99a.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:40:59 +0000
+Subject: [PATCH 41/44] gnu: Add rust-lscolors-0.15.
+
+* gnu/packages/crates-io.scm (rust-lscolors-0.15): New variable.
+---
+ gnu/packages/crates-io.scm | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index d5257dccc2..e34f470f8c 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -40208,6 +40208,28 @@ (define-public rust-lscolors-0.17
+                        ("rust-nu-ansi-term" ,rust-nu-ansi-term-0.50))
+        #:cargo-development-inputs (("rust-tempfile" ,rust-tempfile-3))))))
+ 
++(define-public rust-lscolors-0.15
++  (package
++    (name "rust-lscolors")
++    (version "0.15.0")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "lscolors" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "039jl8lwcw84cii5zpngs4i7jxhy2pnpjjvynympib8386h1aw5z"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-ansi-term" ,rust-ansi-term-0.12)
++                       ("rust-crossterm" ,rust-crossterm-0.26)
++                       ("rust-nu-ansi-term" ,rust-nu-ansi-term-0.49))))
++    (home-page "https://github.com/sharkdp/lscolors")
++    (synopsis "Colorize paths using the LS_COLORS environment variable")
++    (description
++     "This package provides Colorize paths using the LS_COLORS environment variable.")
++    (license (list license:expat license:asl2.0))))
++
+ (define-public rust-lscolors-0.16
+   (package
+     (inherit rust-lscolors-0.17)
+-- 
+2.47.1
+

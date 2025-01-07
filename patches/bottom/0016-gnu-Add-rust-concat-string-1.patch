@@ -1,0 +1,46 @@
+From 7ab7126901595e278fb7a5a3ea4a69da0cd994bf Mon Sep 17 00:00:00 2001
+Message-ID: <7ab7126901595e278fb7a5a3ea4a69da0cd994bf.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:07:18 +0000
+Subject: [PATCH 16/44] gnu: Add rust-concat-string-1.
+
+* gnu/packages/crates-io.scm (rust-concat-string-1): New variable.
+---
+ gnu/packages/crates-io.scm | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 83699b3ee4..185a33f7fa 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -14560,6 +14560,25 @@ (define-public rust-concat-idents-1
+ everywhere.")
+     (license (list license:expat license:asl2.0))))
+ 
++(define-public rust-concat-string-1
++  (package
++    (name "rust-concat-string")
++    (version "1.0.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "concat-string" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "02c6hfxsvs1ff2j58f3qzr526w1yg8d2nf6yyjv81ixgbz5vwfbl"))))
++    (build-system cargo-build-system)
++    (home-page "https://github.com/FaultyRAM/concat-string")
++    (synopsis
++     "Provides macros for concatenating string slices into owned strings")
++    (description
++     "This package provides macros for concatenating string slices into owned strings.")
++    (license (list license:asl2.0 license:expat))))
++
+ (define-public rust-concolor-0.0.11
+   (package
+     (name "rust-concolor")
+-- 
+2.47.1
+

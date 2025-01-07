@@ -1,0 +1,48 @@
+From 349ddc3821b47970e49893a66de66fdd324dc96d Mon Sep 17 00:00:00 2001
+Message-ID: <349ddc3821b47970e49893a66de66fdd324dc96d.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:18:25 +0000
+Subject: [PATCH 27/44] gnu: Add rust-nu-pretty-hex-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-pretty-hex-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 1ef3c4bd39..d2cfd09633 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47424,6 +47424,27 @@ (define-public rust-nu-plugin-0.88
+      "This package provides Functionality for building Nushell plugins.")
+     (license license:expat)))
+ 
++(define-public rust-nu-pretty-hex-0.88
++  (package
++    (name "rust-nu-pretty-hex")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-pretty-hex" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "12i534984736spygc21n9qn0mmparmpjlprpf9wgxrn9blncmjb0"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-nu-ansi-term" ,rust-nu-ansi-term-0.49))))
++    (home-page
++     "https://github.com/nushell/nushell/tree/main/crates/nu-pretty-hex")
++    (synopsis "Pretty hex dump of bytes slice in the common style")
++    (description
++     "This package provides Pretty hex dump of bytes slice in the common style.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

@@ -1,0 +1,48 @@
+From 2f362350321744f0c2b43a6c87b11a604a51f09e Mon Sep 17 00:00:00 2001
+Message-ID: <2f362350321744f0c2b43a6c87b11a604a51f09e.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 20:58:15 +0000
+Subject: [PATCH 14/44] gnu: Add rust-nvml-wrapper-sys-0.8.
+
+* gnu/packages/crates-io.scm (rust-nvml-wrapper-sys-0.8): New variable.
+---
+ gnu/packages/crates-io.scm | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 7706fd6c67..b110076fd2 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -48077,6 +48077,27 @@ (define-public rust-nvml-wrapper-0.10
+      "This package provides a safe and ergonomic Rust wrapper for the NVIDIA
+ Management Library.")
+     (license (list license:expat license:asl2.0))))
++
++(define-public rust-nvml-wrapper-sys-0.8
++  (package
++    (name "rust-nvml-wrapper-sys")
++    (version "0.8.0")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nvml-wrapper-sys" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1dgw2dpldxik2gn3m3aqgl2qj1da5sz6wav5g571ly18dwalb3b9"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-libloading" ,rust-libloading-0.8))))
++    (home-page "https://github.com/Cldfire/nvml-wrapper")
++    (synopsis "Generated bindings to the NVIDIA Management Library")
++    (description
++     "This package provides Generated bindings to the NVIDIA Management Library.")
++    (license (list license:expat license:asl2.0))))
++
+ (define-public rust-oauth2-types-0.7
+   (package
+     (name "rust-oauth2-types")
+-- 
+2.47.1
+

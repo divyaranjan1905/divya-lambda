@@ -1,0 +1,48 @@
+From 159451e2106560a963e5933960bd249ff8c74093 Mon Sep 17 00:00:00 2001
+Message-ID: <159451e2106560a963e5933960bd249ff8c74093.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:17:54 +0000
+Subject: [PATCH 25/44] gnu: Add rust-nu-path-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-path-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index d1050d3860..aff653a80e 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47378,6 +47378,27 @@ (define-public rust-nu-parser-0.88
+     (description "This package provides Nushell's parser.")
+     (license license:expat)))
+ 
++(define-public rust-nu-path-0.88
++  (package
++    (name "rust-nu-path")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-path" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0agarl4ywszlwsiipqspd4yp7la6fsls0fw9zdfwjdr6vzird6xq"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-dirs-next" ,rust-dirs-next-2)
++                       ("rust-omnipath" ,rust-omnipath-0.1)
++                       ("rust-pwd" ,rust-pwd-1))))
++    (home-page "https://github.com/nushell/nushell/tree/main/crates/nu-path")
++    (synopsis "Path handling library for Nushell")
++    (description "This package provides Path handling library for Nushell.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

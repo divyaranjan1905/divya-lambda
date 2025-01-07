@@ -1,0 +1,53 @@
+From 7189663e9270d01990e9d218d6339beeb726d589 Mon Sep 17 00:00:00 2001
+Message-ID: <7189663e9270d01990e9d218d6339beeb726d589.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:27:03 +0000
+Subject: [PATCH 33/44] gnu: Add rust-nu-test-support-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-test-support-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 847f098001..92dab7fcb1 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47587,6 +47587,32 @@ (define-public rust-nu-term-grid-0.88
+     (description "This package provides Nushell grid printing.")
+     (license license:expat)))
+ 
++(define-public rust-nu-test-support-0.88
++  (package
++    (name "rust-nu-test-support")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-test-support" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1lh45lsas3sz16bnsl6h7a27qndwvrk387bx142qibhr2dp02gny"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-hamcrest2" ,rust-hamcrest2-0.3)
++                       ("rust-nu-glob" ,rust-nu-glob-0.88)
++                       ("rust-nu-path" ,rust-nu-path-0.88)
++                       ("rust-nu-utils" ,rust-nu-utils-0.88)
++                       ("rust-num-format" ,rust-num-format-0.4)
++                       ("rust-tempfile" ,rust-tempfile-3)
++                       ("rust-which" ,rust-which-4))))
++    (home-page
++     "https://github.com/nushell/nushell/tree/main/crates/nu-test-support")
++    (synopsis "Support for writing Nushell tests")
++    (description "This package provides Support for writing Nushell tests.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

@@ -1,0 +1,51 @@
+From aa4d8a9238f8494b9b9b5b5f3dded7c8e46fa108 Mon Sep 17 00:00:00 2001
+Message-ID: <aa4d8a9238f8494b9b9b5b5f3dded7c8e46fa108.1736059918.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 20:31:05 +0000
+Subject: [PATCH 03/44] gnu: Add rust-serial-unix-0.4.
+
+* gnu/packages/crates-io.scm (rust-serial-unix-0.4): New variable.
+
+Change-Id: I0757a538c729fa199524acef03fe594fff1247f9
+---
+ gnu/packages/crates-io.scm | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 327cec42bb..e10b76c508 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -70921,6 +70921,28 @@ (define-public rust-serial-test-derive-0.1
+        (("rust-quote" ,rust-quote-0.6)
+         ("rust-syn" ,rust-syn-0.15))))))
+ 
++(define-public rust-serial-unix-0.4
++  (package
++    (name "rust-serial-unix")
++    (version "0.4.0")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "serial-unix" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1dyaaca8g4q5qzc2l01yirzs6igmhc9agg4w8m5f4rnqr6jbqgzh"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-ioctl-rs" ,rust-ioctl-rs-0.1)
++                       ("rust-libc" ,rust-libc-0.2)
++                       ("rust-serial-core" ,rust-serial-core-0.4)
++                       ("rust-termios" ,rust-termios-0.2))))
++    (home-page "https://github.com/dcuddeback/serial-rs")
++    (synopsis "Serial port implementation for Unix")
++    (description "This package provides Serial port implementation for Unix.")
++    (license license:expat)))
++
+ (define-public rust-serial-windows-0.4
+   (package
+     (name "rust-serial-windows")
+-- 
+2.47.1
+

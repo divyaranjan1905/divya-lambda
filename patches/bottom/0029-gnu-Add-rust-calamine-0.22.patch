@@ -1,0 +1,57 @@
+From da9c5378ba0dde23625e72de2c031f17c53cc3c5 Mon Sep 17 00:00:00 2001
+Message-ID: <da9c5378ba0dde23625e72de2c031f17c53cc3c5.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:21:58 +0000
+Subject: [PATCH 29/44] gnu: Add rust-calamine-0.22.
+
+* gnu/packages/crates-io.scm (rust-calamine-0.22): New variable.
+---
+ gnu/packages/crates-io.scm | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 3d33bf4e08..890eca2000 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -10265,6 +10265,36 @@ (define-public rust-cachedir-0.3
+ others, add a tag, ensure/check a tag exists and get the state of a tag.")
+     (license license:expat)))
+ 
++(define-public rust-calamine-0.22
++  (package
++    (name "rust-calamine")
++    (version "0.22.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "calamine" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0ixbak0wag0whhfl2sa7gv4s1bzwz9giqz3gznzwidlvcldaa2zy"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(
++       #:cargo-inputs (("rust-byteorder" ,rust-byteorder-1)
++                       ("rust-chrono" ,rust-chrono-0.4)
++                       ("rust-codepage" ,rust-codepage-0.1)
++                       ("rust-encoding-rs" ,rust-encoding-rs-0.8)
++                       ("rust-log" ,rust-log-0.4)
++                       ("rust-once-cell" ,rust-once-cell-1)
++                       ("rust-quick-xml" ,rust-quick-xml-0.30)
++                       ("rust-serde" ,rust-serde-1)
++                       ("rust-zip" ,rust-zip-0.6))))
++    (home-page "https://github.com/tafia/calamine")
++    (synopsis
++     "An Excel/OpenDocument Spreadsheets reader and deserializer in pure rust")
++    (description
++     "This package provides An Excel/@code{OpenDocument} Spreadsheets reader and deserializer in pure rust.")
++    (license license:expat)))
++
+ (define-public rust-calamine-0.26
+   (package
+     (name "rust-calamine")
+-- 
+2.47.1
+

@@ -1,0 +1,48 @@
+From 8512deb7ad287a99d23714dc7501122033ae05be Mon Sep 17 00:00:00 2001
+Message-ID: <8512deb7ad287a99d23714dc7501122033ae05be.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 20:50:54 +0000
+Subject: [PATCH 10/44] gnu: rust-sysinfo: Update to 0.30.13.
+
+* gnu/packages/crates-io.scm (rust-sysinfo): Update to 0.30.13.
+---
+ gnu/packages/crates-io.scm | 14 +++-----------
+ 1 file changed, 3 insertions(+), 11 deletions(-)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index ab4f50cca7..5c7c92e2b6 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -77694,24 +77694,16 @@ (define-public rust-sysinfo-0.30
+   (package
+     (inherit rust-sysinfo-0.31)
+     (name "rust-sysinfo")
+-    (version "0.30.7")
++    (version "0.30.13")
+     (source
+      (origin
+        (method url-fetch)
+        (uri (crate-uri "sysinfo" version))
+        (file-name (string-append name "-" version ".tar.gz"))
+        (sha256
+-        (base32 "064d267hiqnj2jd9rmkki3fra9yjza6gr6i02qm8a2iqxy45hf0c"))))
++        (base32 "1csbkx1hdlacgzw5ynjyfvgc1xg58w3h1rgh5gm2pysmxvd4snqa"))))
+     (arguments
+-     `(#:cargo-test-flags
+-       (list "--release" "--"
+-             ;; These files aren't available in the build environment.
+-             "--skip=test::check_system_info"
+-             "--skip=test::check_uid_gid"
+-             "--skip=test_networks"
+-             "--skip=test_wait_non_child"
+-             "--skip=test_process_disk_usage")
+-       #:cargo-inputs (("rust-cfg-if" ,rust-cfg-if-1)
++     `(#:cargo-inputs (("rust-cfg-if" ,rust-cfg-if-1)
+                        ("rust-core-foundation-sys" ,rust-core-foundation-sys-0.8)
+                        ("rust-libc" ,rust-libc-0.2)
+                        ("rust-ntapi" ,rust-ntapi-0.4)
+-- 
+2.47.1
+

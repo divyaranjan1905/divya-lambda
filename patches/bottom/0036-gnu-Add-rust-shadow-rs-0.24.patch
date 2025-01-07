@@ -1,0 +1,52 @@
+From 03e407d84e5d98fc351fd6747e9be209481c7750 Mon Sep 17 00:00:00 2001
+Message-ID: <03e407d84e5d98fc351fd6747e9be209481c7750.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:34:48 +0000
+Subject: [PATCH 36/44] gnu: Add rust-shadow-rs-0.24.
+
+* gnu/packages/crates-io.scm (rust-shadow-rs-0.24): New variable.
+---
+ gnu/packages/crates-io.scm | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index bc74eb282b..af044f8ee3 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -71792,6 +71792,31 @@ (define-public rust-servo-fontconfig-sys-5
+      "This package provides a Rust wrapper around Fontxonfig.")
+     (license license:expat)))
+ 
++(define-public rust-shadow-rs-0.24
++  (package
++    (name "rust-shadow-rs")
++    (version "0.24.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "shadow-rs" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0xqcw27hf8ybxlzhnnx5k0dvb5lq6yydsjv6yrfilky9y6pqq6gr"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-const-format" ,rust-const-format-0.2)
++                       ("rust-document-features" ,rust-document-features-0.2)
++                       ("rust-git2" ,rust-git2-0.18)
++                       ("rust-is-debug" ,rust-is-debug-1)
++                       ("rust-time" ,rust-time-0.3)
++                       ("rust-tzdb" ,rust-tzdb-0.5))))
++    (home-page "https://github.com/baoyachi/shadow-rs")
++    (synopsis "build-time information stored in your rust project")
++    (description
++     "This package provides a build-time information stored in your rust project.")
++    (license (list license:expat license:asl2.0))))
++
+ (define-public rust-shadow-rs-0.37
+   (package
+     (name "rust-shadow-rs")
+-- 
+2.47.1
+

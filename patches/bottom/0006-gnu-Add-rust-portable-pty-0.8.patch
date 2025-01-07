@@ -1,0 +1,60 @@
+From c98ca3dd54a659742e35193ce268be88b6aed3e3 Mon Sep 17 00:00:00 2001
+Message-ID: <c98ca3dd54a659742e35193ce268be88b6aed3e3.1736059918.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 20:41:12 +0000
+Subject: [PATCH 06/44] gnu: Add rust-portable-pty-0.8.
+
+* gnu/packages/crates-io.scm (rust-portable-pty-0.8): New variable.
+---
+ gnu/packages/crates-io.scm | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 7394fb5072..60037b2b7b 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -55065,6 +55065,39 @@ (define-public rust-portable-atomic-util-0.1
+     (arguments
+      `(#:cargo-inputs (("rust-portable-atomic" ,rust-portable-atomic-1))))))
+ 
++(define-public rust-portable-pty-0.8
++  (package
++    (name "rust-portable-pty")
++    (version "0.8.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "portable-pty" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1gmh9ij90qwxx8gzvs6dj2vlc1ackv8zhd4mzfly3nq3586fhvl0"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-anyhow" ,rust-anyhow-1)
++                       ("rust-bitflags" ,rust-bitflags-1)
++                       ("rust-downcast-rs" ,rust-downcast-rs-1)
++                       ("rust-filedescriptor" ,rust-filedescriptor-0.8)
++                       ("rust-lazy-static" ,rust-lazy-static-1)
++                       ("rust-libc" ,rust-libc-0.2)
++                       ("rust-log" ,rust-log-0.4)
++                       ("rust-nix" ,rust-nix-0.25)
++                       ("rust-serde" ,rust-serde-1)
++                       ("rust-serde-derive" ,rust-serde-derive-1)
++                       ("rust-serial" ,rust-serial-0.4)
++                       ("rust-shared-library" ,rust-shared-library-0.1)
++                       ("rust-shell-words" ,rust-shell-words-1)
++                       ("rust-winapi" ,rust-winapi-0.3)
++                       ("rust-winreg" ,rust-winreg-0.10))))
++    (home-page "https://github.com/wez/wezterm")
++    (synopsis "Cross platform pty interface")
++    (description "This package provides Cross platform pty interface.")
++    (license license:expat)))
++
+ (define-public rust-postcard-1
+   (package
+     (name "rust-postcard")
+-- 
+2.47.1
+

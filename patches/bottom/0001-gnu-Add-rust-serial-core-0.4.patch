@@ -1,0 +1,49 @@
+From f0ea58a5996de9b821de15af58500dc66897fc92 Mon Sep 17 00:00:00 2001
+Message-ID: <f0ea58a5996de9b821de15af58500dc66897fc92.1736059918.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sun, 5 Jan 2025 06:21:06 +0000
+Subject: [PATCH 01/44] gnu: Add rust-serial-core-0.4.
+
+* gnu/packages/crates-io.scm (rust-serial-core-0.4): New variable.
+
+Change-Id: Iabd12ef4492144ea1c7e63dc3989ed569b927839
+---
+ gnu/packages/crates-io.scm | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 38c0aa8e0d..c0ba7a3013 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -70501,6 +70501,26 @@ (define-public rust-serial-0.4
+      "This package provides Rust library for accessing serial ports.")
+     (license license:expat)))
+ 
++(define-public rust-serial-core-0.4
++  (package
++    (name "rust-serial-core")
++    (version "0.4.0")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "serial-core" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "10a5lvllz3ljva66bqakrn8cxb3pkaqyapqjw9x760al6jdj0iiz"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(
++       #:cargo-inputs (("rust-libc" ,rust-libc-0.2))))
++    (home-page "https://github.com/dcuddeback/serial-rs")
++    (synopsis "Rust abstractions for serial ports")
++    (description "This package provides Rust abstractions for serial ports.")
++    (license license:expat)))
++
+ (define-public rust-serial-test-3
+   (package
+     (name "rust-serial-test")
+-- 
+2.47.1
+

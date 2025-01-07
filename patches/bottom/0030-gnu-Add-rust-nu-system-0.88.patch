@@ -1,0 +1,56 @@
+From 1d080001b8304e478f29116e1bd1f96cbac95fda Mon Sep 17 00:00:00 2001
+Message-ID: <1d080001b8304e478f29116e1bd1f96cbac95fda.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:25:15 +0000
+Subject: [PATCH 30/44] gnu: Add rust-nu-system-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-system-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 890eca2000..a6efbebfbe 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47511,6 +47511,35 @@ (define-public rust-nu-protocol-0.88
+      "This package provides Nushell's internal protocols, including its abstract syntax tree.")
+     (license license:expat)))
+ 
++(define-public rust-nu-system-0.88
++  (package
++    (name "rust-nu-system")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-system" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1l6aaqz06vg0znyr088pbn4n35psgk784v6yjhkpnmm6v5zcvqn8"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-chrono" ,rust-chrono-0.4)
++                       ("rust-libc" ,rust-libc-0.2)
++                       ("rust-libproc" ,rust-libproc-0.14)
++                       ("rust-log" ,rust-log-0.4)
++                       ("rust-mach2" ,rust-mach2-0.4)
++                       ("rust-nix" ,rust-nix-0.27)
++                       ("rust-ntapi" ,rust-ntapi-0.4)
++                       ("rust-once-cell" ,rust-once-cell-1)
++                       ("rust-procfs" ,rust-procfs-0.16)
++                       ("rust-sysinfo" ,rust-sysinfo-0.29)
++                       ("rust-winapi" ,rust-winapi-0.3))))
++    (home-page "https://github.com/nushell/nushell/tree/main/crates/nu-system")
++    (synopsis "Nushell system querying")
++    (description "This package provides Nushell system querying.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

@@ -1,0 +1,55 @@
+From 1e2cbcd7cd5deafbf5a75005689137162affb049 Mon Sep 17 00:00:00 2001
+Message-ID: <1e2cbcd7cd5deafbf5a75005689137162affb049.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:14:45 +0000
+Subject: [PATCH 18/44] gnu: Add rust-nu-cmd-lang-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-cmd-lang-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index e357faeb78..9e2aa31ba8 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47125,6 +47125,34 @@ (define-public rust-nu-cmd-base-0.88
+      "This package provides The foundation tools to build Nushell commands.")
+     (license license:expat)))
+ 
++(define-public rust-nu-cmd-lang-0.88
++  (package
++    (name "rust-nu-cmd-lang")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-cmd-lang" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "133dhwbxajvj5lidkcdl6m8l3g639h2485s1hsr77yhdzzhi3jv3"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-fancy-regex" ,rust-fancy-regex-0.11)
++                       ("rust-itertools" ,rust-itertools-0.11)
++                       ("rust-nu-ansi-term" ,rust-nu-ansi-term-0.49)
++                       ("rust-nu-engine" ,rust-nu-engine-0.88)
++                       ("rust-nu-parser" ,rust-nu-parser-0.88)
++                       ("rust-nu-protocol" ,rust-nu-protocol-0.88)
++                       ("rust-nu-utils" ,rust-nu-utils-0.88)
++                       ("rust-shadow-rs" ,rust-shadow-rs-0.24)
++                       ("rust-shadow-rs" ,rust-shadow-rs-0.24))))
++    (home-page
++     "https://github.com/nushell/nushell/tree/main/crates/nu-cmd-lang")
++    (synopsis "Nushell's core language commands")
++    (description "This package provides Nushell's core language commands.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

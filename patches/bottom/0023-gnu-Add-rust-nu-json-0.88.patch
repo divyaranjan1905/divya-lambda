@@ -1,0 +1,48 @@
+From 8e0969437220a759c1a29204016454bf23cf084d Mon Sep 17 00:00:00 2001
+Message-ID: <8e0969437220a759c1a29204016454bf23cf084d.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:16:53 +0000
+Subject: [PATCH 23/44] gnu: Add rust-nu-json-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-json-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index d973843120..5fd3b33b7c 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47330,6 +47330,27 @@ (define-public rust-nu-glob-0.88
+ patterns.")
+     (license (list license:expat license:asl2.0))))
+ 
++(define-public rust-nu-json-0.88
++  (package
++    (name "rust-nu-json")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-json" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "10cdqvvmchmgb3isd6c7d9qfmiapcwri9y6x066zq8s411fq5rvn"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-linked-hash-map" ,rust-linked-hash-map-0.5)
++                       ("rust-num-traits" ,rust-num-traits-0.2)
++                       ("rust-serde" ,rust-serde-1))))
++    (home-page "https://github.com/nushell/nushell/tree/main/crates/nu-json")
++    (synopsis "Fork of serde-hjson")
++    (description "This package provides Fork of serde-hjson.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

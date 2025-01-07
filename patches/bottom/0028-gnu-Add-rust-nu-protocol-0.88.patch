@@ -1,0 +1,63 @@
+From 461b83819b498337d4eddc3e25e4aeadb279522d Mon Sep 17 00:00:00 2001
+Message-ID: <461b83819b498337d4eddc3e25e4aeadb279522d.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:18:45 +0000
+Subject: [PATCH 28/44] gnu: Add rust-nu-protocol-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-protocol-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 36 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index d2cfd09633..3d33bf4e08 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47445,6 +47445,42 @@ (define-public rust-nu-pretty-hex-0.88
+      "This package provides Pretty hex dump of bytes slice in the common style.")
+     (license license:expat)))
+ 
++(define-public rust-nu-protocol-0.88
++  (package
++    (name "rust-nu-protocol")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-protocol" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0jarr4xfzppy2hvw4i74h83mxhnjlv0xbzg0s8yifqvvk5h5lfi4"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-byte-unit" ,rust-byte-unit-4)
++                       ("rust-chrono" ,rust-chrono-0.4)
++                       ("rust-chrono-humanize" ,rust-chrono-humanize-0.2)
++                       ("rust-fancy-regex" ,rust-fancy-regex-0.11)
++                       ("rust-indexmap" ,rust-indexmap-2)
++                       ("rust-lru" ,rust-lru-0.12)
++                       ("rust-miette" ,rust-miette-5)
++                       ("rust-nu-path" ,rust-nu-path-0.88)
++                       ("rust-nu-system" ,rust-nu-system-0.88)
++                       ("rust-nu-utils" ,rust-nu-utils-0.88)
++                       ("rust-num-format" ,rust-num-format-0.4)
++                       ("rust-serde" ,rust-serde-1)
++                       ("rust-serde-json" ,rust-serde-json-1)
++                       ("rust-thiserror" ,rust-thiserror-1)
++                       ("rust-typetag" ,rust-typetag-0.2))))
++    (home-page
++     "https://github.com/nushell/nushell/tree/main/crates/nu-protocol")
++    (synopsis
++     "Nushell's internal protocols, including its abstract syntax tree")
++    (description
++     "This package provides Nushell's internal protocols, including its abstract syntax tree.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

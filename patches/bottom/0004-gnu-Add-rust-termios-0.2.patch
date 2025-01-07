@@ -1,0 +1,68 @@
+From 15ea6fe360ef541c67f1eefba6b3dd9fe5511076 Mon Sep 17 00:00:00 2001
+Message-ID: <15ea6fe360ef541c67f1eefba6b3dd9fe5511076.1736059918.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 20:33:08 +0000
+Subject: [PATCH 04/44] gnu: Add rust-termios-0.2.
+
+* gnu/packages/crates-io.scm (rust-termios-0.2): New variable.
+
+Change-Id: I55759155d447ec3f70495f6c02eee1b9851b799d
+---
+ gnu/packages/crates-io.scm | 34 +++++++++++++++++++++++++++-------
+ 1 file changed, 27 insertions(+), 7 deletions(-)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index e10b76c508..11c36cc7dd 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -79186,18 +79186,38 @@ (define-public rust-termion-1
+              ("rust-redox-syscall" ,rust-redox-syscall-0.2)
+              ("rust-redox-termios" ,rust-redox-termios-0.1))))))
+ 
++(define-public rust-termios-0.2
++  (package
++    (name "rust-termios")
++    (version "0.2.2")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "termios" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0fk8nl0rmk43jrh6hjz6c6d83ri7l6fikag6lh0ffz3di9cwznfm"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-libc" ,rust-libc-0.2))))
++    (home-page "https://github.com/dcuddeback/termios-rs")
++    (synopsis "Safe bindings for the termios library")
++    (description
++     "This package provides Safe bindings for the termios library.")
++    (license license:expat)))
++
+ (define-public rust-termios-0.3
+   (package
+     (name "rust-termios")
+     (version "0.3.3")
+     (source
+-      (origin
+-        (method url-fetch)
+-        (uri (crate-uri "termios" version))
+-        (file-name (string-append name "-" version ".tar.gz"))
+-        (sha256
+-         (base32
+-          "0sxcs0g00538jqh5xbdqakkzijadr8nj7zmip0c7jz3k83vmn721"))))
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "termios" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32
++         "0sxcs0g00538jqh5xbdqakkzijadr8nj7zmip0c7jz3k83vmn721"))))
+     (build-system cargo-build-system)
+     (arguments
+      `(#:cargo-inputs
+-- 
+2.47.1
+

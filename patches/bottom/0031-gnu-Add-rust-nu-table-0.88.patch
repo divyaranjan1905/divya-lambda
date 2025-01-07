@@ -1,0 +1,53 @@
+From dc8da57dc226935cc2f581c9af99a3c84a266afc Mon Sep 17 00:00:00 2001
+Message-ID: <dc8da57dc226935cc2f581c9af99a3c84a266afc.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:25:49 +0000
+Subject: [PATCH 31/44] gnu: Add rust-nu-table-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-table-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index a6efbebfbe..a9e3bc7e60 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47540,6 +47540,32 @@ (define-public rust-nu-system-0.88
+     (description "This package provides Nushell system querying.")
+     (license license:expat)))
+ 
++(define-public rust-nu-table-0.88
++  (package
++    (name "rust-nu-table")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-table" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "18r72vvk0y354gfc8fna2p2awdgq63s345cw8pb96dcb4w31k0sn"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-fancy-regex" ,rust-fancy-regex-0.11)
++                       ("rust-nu-ansi-term" ,rust-nu-ansi-term-0.49)
++                       ("rust-nu-color-config" ,rust-nu-color-config-0.88)
++                       ("rust-nu-engine" ,rust-nu-engine-0.88)
++                       ("rust-nu-protocol" ,rust-nu-protocol-0.88)
++                       ("rust-nu-utils" ,rust-nu-utils-0.88)
++                       ("rust-once-cell" ,rust-once-cell-1)
++                       ("rust-tabled" ,rust-tabled-0.14))))
++    (home-page "https://github.com/nushell/nushell/tree/main/crates/nu-table")
++    (synopsis "Nushell table printing")
++    (description "This package provides Nushell table printing.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

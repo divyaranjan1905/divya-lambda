@@ -1,0 +1,52 @@
+From 69c3f52add67fd1cc03ffedd524b2370d11194a9 Mon Sep 17 00:00:00 2001
+Message-ID: <69c3f52add67fd1cc03ffedd524b2370d11194a9.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:18:10 +0000
+Subject: [PATCH 26/44] gnu: Add rust-nu-plugin-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-plugin-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index aff653a80e..1ef3c4bd39 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47399,6 +47399,31 @@ (define-public rust-nu-path-0.88
+     (description "This package provides Path handling library for Nushell.")
+     (license license:expat)))
+ 
++(define-public rust-nu-plugin-0.88
++  (package
++    (name "rust-nu-plugin")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-plugin" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0l42m2ky6iczkmv412s5ayira952fq146fpd10hjv9jq9h1g2zdj"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-bincode" ,rust-bincode-1)
++                       ("rust-nu-engine" ,rust-nu-engine-0.88)
++                       ("rust-nu-protocol" ,rust-nu-protocol-0.88)
++                       ("rust-rmp-serde" ,rust-rmp-serde-1)
++                       ("rust-serde" ,rust-serde-1)
++                       ("rust-serde-json" ,rust-serde-json-1))))
++    (home-page "https://github.com/nushell/nushell/tree/main/crates/nu-plugin")
++    (synopsis "Functionality for building Nushell plugins")
++    (description
++     "This package provides Functionality for building Nushell plugins.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

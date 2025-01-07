@@ -1,0 +1,55 @@
+From eb06249fabb13a0520a7c0d9d7f6be40e7b61315 Mon Sep 17 00:00:00 2001
+Message-ID: <eb06249fabb13a0520a7c0d9d7f6be40e7b61315.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:14:24 +0000
+Subject: [PATCH 17/44] gnu: Add rust-nu-cmd-base-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-cmd-base-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 185a33f7fa..e357faeb78 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47097,6 +47097,34 @@ (define-public rust-nu-cli-0.88
+      "This package provides CLI-related functionality for Nushell.")
+     (license license:expat)))
+ 
++(define-public rust-nu-cmd-base-0.88
++  (package
++    (name "rust-nu-cmd-base")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-cmd-base" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "172picvxcj37wwfzmribkyfa23fxjnm2b6jrf561dlhiw99dgxg1"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-indexmap" ,rust-indexmap-2)
++                       ("rust-miette" ,rust-miette-5)
++                       ("rust-nu-engine" ,rust-nu-engine-0.88)
++                       ("rust-nu-glob" ,rust-nu-glob-0.88)
++                       ("rust-nu-parser" ,rust-nu-parser-0.88)
++                       ("rust-nu-path" ,rust-nu-path-0.88)
++                       ("rust-nu-protocol" ,rust-nu-protocol-0.88)
++                       ("rust-nu-utils" ,rust-nu-utils-0.88))))
++    (home-page
++     "https://github.com/nushell/nushell/tree/main/crates/nu-cmd-base")
++    (synopsis "The foundation tools to build Nushell commands")
++    (description
++     "This package provides The foundation tools to build Nushell commands.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

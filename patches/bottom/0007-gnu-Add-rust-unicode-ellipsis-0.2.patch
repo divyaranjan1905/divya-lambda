@@ -1,0 +1,50 @@
+From e4711f7e02ce3abd537e11ccd055dd13f09861de Mon Sep 17 00:00:00 2001
+Message-ID: <e4711f7e02ce3abd537e11ccd055dd13f09861de.1736059918.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 20:44:22 +0000
+Subject: [PATCH 07/44] gnu: Add rust-unicode-ellipsis-0.2.
+
+* gnu/packages/crates-io.scm (rust-unicode-ellipsis-0.2): New variable.
+---
+ gnu/packages/crates-io.scm | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 60037b2b7b..7bc02de2dc 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -87245,6 +87245,29 @@ (define-public rust-unicode-categories-0.1
+ membership for characters in Rust.")
+     (license (list license:expat license:asl2.0))))
+ 
++(define-public rust-unicode-ellipsis-0.2
++  (package
++    (name "rust-unicode-ellipsis")
++    (version "0.2.0")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "unicode-ellipsis" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1zsdzmy6x1p8s35rgfmc7nx1qcs6j4bcfbfyiimrdngyqfwbajlj"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-unicode-segmentation" ,rust-unicode-segmentation-1)
++                       ("rust-unicode-width" ,rust-unicode-width-0.1))))
++    (home-page "https://github.com/ClementTsang/unicode-ellipsis")
++    (synopsis
++     "crate to truncate Unicode strings to a certain width, automatically adding an ellipsis if the string is too long.")
++    (description
++     "This package provides a crate to truncate Unicode strings to a certain width,
++automatically adding an ellipsis if the string is too long.")
++    (license (list license:expat license:asl2.0))))
++
+ (define-public rust-unicode-general-category-0.6
+   (package
+     (name "rust-unicode-general-category")
+-- 
+2.47.1
+

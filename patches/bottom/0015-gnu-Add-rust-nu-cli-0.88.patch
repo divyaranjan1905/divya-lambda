@@ -1,0 +1,69 @@
+From f10f566d82fdd3196a25911266da5df3b3f6d5f9 Mon Sep 17 00:00:00 2001
+Message-ID: <f10f566d82fdd3196a25911266da5df3b3f6d5f9.1736059919.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:03:42 +0000
+Subject: [PATCH 15/44] gnu: Add rust-nu-cli-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-cli-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 42 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index b110076fd2..83699b3ee4 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47036,6 +47036,48 @@ (define-public rust-ntex-bytes-0.1
+     (description "Types and traits for working with bytes (bytes crate fork)")
+     (license license:expat)))
+ 
++(define-public rust-nu-cli-0.88
++  (package
++    (name "rust-nu-cli")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-cli" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1h0dzmaaxzmc3198v0q5n0pp5arjbppdplv9pjmvz5dqhvjdyva3"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-chrono" ,rust-chrono-0.4)
++                       ("rust-crossterm" ,rust-crossterm-0.27)
++                       ("rust-fancy-regex" ,rust-fancy-regex-0.11)
++                       ("rust-fuzzy-matcher" ,rust-fuzzy-matcher-0.3)
++                       ("rust-is-executable" ,rust-is-executable-1)
++                       ("rust-log" ,rust-log-0.4)
++                       ("rust-miette" ,rust-miette-5)
++                       ("rust-nu-ansi-term" ,rust-nu-ansi-term-0.49)
++                       ("rust-nu-cmd-base" ,rust-nu-cmd-base-0.88)
++                       ("rust-nu-color-config" ,rust-nu-color-config-0.88)
++                       ("rust-nu-engine" ,rust-nu-engine-0.88)
++                       ("rust-nu-parser" ,rust-nu-parser-0.88)
++                       ("rust-nu-path" ,rust-nu-path-0.88)
++                       ("rust-nu-protocol" ,rust-nu-protocol-0.88)
++                       ("rust-nu-utils" ,rust-nu-utils-0.88)
++                       ("rust-once-cell" ,rust-once-cell-1)
++                       ("rust-pathdiff" ,rust-pathdiff-0.2)
++                       ("rust-percent-encoding" ,rust-percent-encoding-2)
++                       ("rust-reedline" ,rust-reedline-0.27)
++                       ("rust-sysinfo" ,rust-sysinfo-0.29)
++                       ("rust-unicode-segmentation" ,rust-unicode-segmentation-1)
++                       ("rust-uuid" ,rust-uuid-1)
++                       ("rust-which" ,rust-which-5))))
++    (home-page "https://github.com/nushell/nushell/tree/main/crates/nu-cli")
++    (synopsis "CLI-related functionality for Nushell")
++    (description
++     "This package provides CLI-related functionality for Nushell.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

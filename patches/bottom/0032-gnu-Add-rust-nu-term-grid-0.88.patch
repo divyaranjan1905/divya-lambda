@@ -1,0 +1,48 @@
+From 19a3d07361484252a4b9c110992bcc52bb1a4bc6 Mon Sep 17 00:00:00 2001
+Message-ID: <19a3d07361484252a4b9c110992bcc52bb1a4bc6.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:26:32 +0000
+Subject: [PATCH 32/44] gnu: Add rust-nu-term-grid-0.88.
+
+* gnu/packages/crates-io.scm (rust-nu-term-grid-0.88): New variable.
+---
+ gnu/packages/crates-io.scm | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index a9e3bc7e60..847f098001 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -47566,6 +47566,27 @@ (define-public rust-nu-table-0.88
+     (description "This package provides Nushell table printing.")
+     (license license:expat)))
+ 
++(define-public rust-nu-term-grid-0.88
++  (package
++    (name "rust-nu-term-grid")
++    (version "0.88.1")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "nu-term-grid" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "1b40z6wz8gbs4gpw29ig48yw94b6xsbwlb3fqj2z6cl8fc3h8ldw"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-nu-utils" ,rust-nu-utils-0.88)
++                       ("rust-unicode-width" ,rust-unicode-width-0.1))))
++    (home-page
++     "https://github.com/nushell/nushell/tree/main/crates/nu-term-grid")
++    (synopsis "Nushell grid printing")
++    (description "This package provides Nushell grid printing.")
++    (license license:expat)))
++
+ (define-public rust-nucleo-0.2
+   (package
+     (name "rust-nucleo")
+-- 
+2.47.1
+

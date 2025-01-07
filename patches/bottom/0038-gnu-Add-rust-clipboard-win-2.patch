@@ -1,0 +1,47 @@
+From 8701fc316059b4bf08b6bbbb4dd992e123d5ba8e Mon Sep 17 00:00:00 2001
+Message-ID: <8701fc316059b4bf08b6bbbb4dd992e123d5ba8e.1736059920.git.divya@subvertising.org>
+In-Reply-To: <cover.1736059918.git.divya@subvertising.org>
+References: <cover.1736059918.git.divya@subvertising.org>
+From: Divya Ranjan <divya@subvertising.org>
+Date: Sat, 4 Jan 2025 21:36:08 +0000
+Subject: [PATCH 38/44] gnu: Add rust-clipboard-win-2.
+
+* gnu/packages/crates-io.scm (rust-clipboard-win-2): New variable.
+---
+ gnu/packages/crates-io.scm | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/gnu/packages/crates-io.scm b/gnu/packages/crates-io.scm
+index 27cd4e2623..062f25bd72 100644
+--- a/gnu/packages/crates-io.scm
++++ b/gnu/packages/crates-io.scm
+@@ -13255,6 +13255,26 @@ (define-public rust-clicolors-control-1
+ colorization.")
+     (license license:expat)))
+ 
++(define-public rust-clipboard-win-2
++  (package
++    (name "rust-clipboard-win")
++    (version "2.2.0")
++    (source
++     (origin
++       (method url-fetch)
++       (uri (crate-uri "clipboard-win" version))
++       (file-name (string-append name "-" version ".tar.gz"))
++       (sha256
++        (base32 "0svqk0lrw66abaxd6h7l4k4g2s5vd1dcipy34kzfan6mzvb97873"))))
++    (build-system cargo-build-system)
++    (arguments
++     `(#:cargo-inputs (("rust-winapi" ,rust-winapi-0.3))))
++    (home-page "https://github.com/DoumanAsh/clipboard-win")
++    (synopsis "Provides simple way to interact with Windows clipboard")
++    (description
++     "This package provides simple way to interact with Windows clipboard.")
++    (license license:expat)))
++
+ (define-public rust-clippy-0.0.302
+   (package
+     (name "rust-clippy")
+-- 
+2.47.1
+
