@@ -43,6 +43,11 @@ Here are the packages that are publicly available from the channel:
 =(divya-lambda emacs-xyz):=
 - =emacs-binder= ([[https://lists.gnu.org/archive/html/guix-patches/2025-01/msg00016.html][Sent]] upstream)
 
+** Rust
+*** Apps
+=(divya-lambda rust-apps)=:
+- =bottom= (Merged, upstream)
+
 ** Fonts
 =(divya-lambda fonts):=
 - =font-spline-sans= ([[https://lists.gnu.org/archive/html/guix-patches/2025-01/msg00025.html][Sent]] upstream)
