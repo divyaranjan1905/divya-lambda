@@ -39,9 +39,9 @@
   #:use-module (gnu packages crates-graphics)
   #:use-module ((guix licenses) #:prefix license:))
 
-(define-public rust-bottom-0.10
+(define-public bottom
   (package
-   (name "rust-bottom")
+   (name "bottom")
    (version "0.10.2")
    (source
     (origin
