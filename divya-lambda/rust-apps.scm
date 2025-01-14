@@ -39,6 +39,7 @@
   #:use-module (gnu packages crates-graphics)
   #:use-module (gnu packages crates-compression)
   #:use-module (gnu packages crates-shell)
+  #:use-module (gnu packages crates-database)
   #:use-module ((guix licenses) #:prefix license:))
 
 (define-public bottom
