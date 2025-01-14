@@ -36,5 +36,3 @@
     (inputs
      (modify-inputs (package-inputs rtorrent)
        (append xmlrpc-c)))))
-
-rtorrent-xml-rpc
