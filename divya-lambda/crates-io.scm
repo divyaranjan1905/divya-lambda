@@ -35,6 +35,7 @@
   #:use-module (gnu packages crates-apple)
   #:use-module (gnu packages crates-graphics)
   #:use-module (gnu packages crates-compression)
+  #:use-module (gnu packages crates-shell)
   #:use-module ((guix licenses) #:prefix license:))
 
 (define-public rust-serial-windows-0.4
