@@ -54,6 +54,10 @@ Here are the packages that are publicly available from the channel:
 =(divya-lambda fonts):=
 - =font-spline-sans= ([[https://lists.gnu.org/archive/html/guix-patches/2025-01/msg00025.html][Sent]] upstream)
 - =font-spline-sans-mono= ([[https://lists.gnu.org/archive/html/guix-patches/2025-01/msg00101.html][Sent]] upstream)
+
+** Torrenting
+=(divya-lambda bittorent)=:
+- =rtorrent-xml-rpc=
 * Patches
 The patches for all/most of the packages in this channel that were sent to upstream Guix can also be found in the =patches/= directory.
 * Other Channels
