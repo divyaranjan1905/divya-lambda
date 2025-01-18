@@ -570,33 +570,6 @@ Management Library.")
      "This package provides macros for concatenating string slices into owned strings.")
     (license (list license:asl2.0 license:expat))))
 
-(define-public rust-nu-test-support-0.88
-  (package
-    (name "rust-nu-test-support")
-    (version "0.88.1")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (crate-uri "nu-test-support" version))
-       (file-name (string-append name "-" version ".tar.gz"))
-       (sha256
-        (base32 "1lh45lsas3sz16bnsl6h7a27qndwvrk387bx142qibhr2dp02gny"))))
-    (build-system cargo-build-system)
-    (arguments
-     `(
-       #:cargo-inputs (("rust-hamcrest2" ,rust-hamcrest2-0.3)
-                       ("rust-nu-glob" ,rust-nu-glob-0.88)
-                       ("rust-nu-path" ,rust-nu-path-0.88)
-                       ("rust-nu-utils" ,rust-nu-utils-0.88)
-                       ("rust-num-format" ,rust-num-format-0.4)
-                       ("rust-tempfile" ,rust-tempfile-3)
-                       ("rust-which" ,rust-which-4))))
-    (home-page
-     "https://github.com/nushell/nushell/tree/main/crates/nu-test-support")
-    (synopsis "Support for writing Nushell tests")
-    (description "This package provides Support for writing Nushell tests.")
-    (license license:expat)))
-
 (define-public rust-roxmltree-0.18
   (package
     (name "rust-roxmltree")
@@ -1437,7 +1410,6 @@ patterns.")
                        ("rust-nu-command" ,rust-nu-command-0.88)
                        ("rust-nu-parser" ,rust-nu-parser-0.88)
                        ("rust-nu-protocol" ,rust-nu-protocol-0.88)
-                       ("rust-nu-test-support" ,rust-nu-test-support-0.88)
                        ("rust-reedline" ,rust-reedline-0.27))))
     (home-page "https://github.com/assert-rs/completest")
     (synopsis "Run completions for your program")
