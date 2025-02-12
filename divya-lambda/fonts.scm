@@ -28,6 +28,26 @@
   #:use-module
   ((guix licenses) #:prefix license:))
 
+(define-public font-aporetic
+  (package
+    (name "font-aporetic")
+    (version "1.1.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/protesilaos/aporetic")
+             (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0cihagy7vhw5pqznbihwv3pgb516i94iqfnvfm73njrx1a4dalz6"))))
+    (build-system font-build-system)
+    (home-page "https://github.com/protesilaos/aporetic")
+    (synopsis "Successor to Iosevka Comfy")
+    (description
+     "Aporetic fonts are a custom build of Iosevka with different style and metrics than the default. This is the successor to my Iosevka Comfy fonts.")
+    (license license:silofl1.1)))
+
 (define-public font-spline-sans
   (let ((commit "5196436e0714c188c70f30a93b4759e8ed8afb69")
         (revision "0"))
@@ -79,9 +99,4 @@ checkout processes, and programming.  Space efficiency is accomplished by conden
 traditional grotesque proportions.")
       (license license:silofl1.1))))
 
-;; (define-public font-elstob
-;;   (package
-;;     (name "font-elsob")
-;;     (version "3.001")
-;;     (source )))
-font-spline-sans-mono
+font-aporetic
