@@ -34,11 +34,11 @@
 
 ;;; !!! EMACS COMMIT AND HASH BEGIN !!!
 (define emacs-master-commit
-  "1bc8412ecbf58a16efc4e9ddb0d46ef25ce7c14f")
+  "be8a7c9c882540dd7267f9046166cb680f10fd9d")
 (define emacs-master-time
-  "1735820952")
+  "1740879684")
 (define emacs-master-hash
-  "0n5yzsb6klncbdayy5px997afp7a2s3lfgr2xk3s1psgxkfpb27i")
+  "1716hjm52a20945m8mpzi812pcpwnjq0c0c2y2y81i3lxx03p1dm")
 ;;; !!! EMACS COMMIT AND HASH END !!!
 
 (define-public emacs-master-minimal
