@@ -24,6 +24,7 @@
   #:use-module (guix gexp)
   #:use-module (guix git-download)
   #:use-module (guix download)
+  #:use-module (guix build-system gnu)
 
   #:use-module (gnu packages xorg)
   #:use-module (gnu packages emacs)
