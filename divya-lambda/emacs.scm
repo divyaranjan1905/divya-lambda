@@ -431,6 +431,51 @@ languages.")
             (files '("lib/tree-sitter")))))
     (properties `((upstream-name . "emacs")))))
 
+(define-public emacs
+  (package/inherit emacs-no-x
+    (name "emacs")
+    (synopsis "The extensible, customizable, self-documenting text editor")
+    (build-system glib-or-gtk-build-system)
+    (arguments
+     (substitute-keyword-arguments (package-arguments emacs-no-x)
+       ((#:modules _) (%emacs-modules build-system))
+       ((#:configure-flags flags #~'())
+        #~(cons* "--with-cairo" #$flags))
+       ((#:phases phases)
+        #~(modify-phases #$phases
+            ;; Note: due to the changed #:modules, %standard-phases in #$phases
+            ;; refers to glib-or-gtk:%standard-phases, so we don't need to add
+            ;; them ourselves.
+            (add-after 'glib-or-gtk-wrap 'restore-emacs-pdmp
+              ;; Restore the dump file that Emacs installs somewhere in
+              ;; libexec/ to its original state.
+              (lambda* (#:key outputs target #:allow-other-keys)
+                (let* ((libexec (string-append (assoc-ref outputs "out")
+                                               "/libexec"))
+                       ;; each of these ought to only match a single file,
+                       ;; but even if not (find-files) sorts by string<,
+                       ;; so the Nth element in one maps to the Nth element of
+                       ;; the other
+                       (pdmp (find-files libexec "\\.pdmp$"))
+                       (pdmp-real (find-files libexec "\\.pdmp-real$")))
+                  (for-each rename-file pdmp-real pdmp))))))))
+    (inputs (modify-inputs (package-inputs emacs-no-x)
+              (prepend
+               cairo
+               dbus
+               gtk+
+               giflib
+               harfbuzz
+               libjpeg-turbo
+               libotf
+               libpng
+               (librsvg-for-system)
+               libtiff
+               libx11
+               libxft
+               libxpm
+               pango
+               poppler)))))
 ;; Lucid
 (define-public emacs-lucid
   (package/inherit emacs-no-x
