@@ -596,6 +596,20 @@ editor (with xwidgets support)")
      (modify-inputs (package-inputs emacs)
        (prepend webkitgtk-with-libsoup2 libxcomposite)))))
 
+;; PGTK+XWidgets
+(define-public emacs-pgtk-xwidgets
+  (package
+    (inherit emacs-pgtk)
+    (name "emacs-pgtk-xwidgets")
+    (synopsis "Emacs text editor with @code{xwidgets} and @code{pgtk} support")
+    (arguments
+     (substitute-keyword-arguments (package-arguments emacs-pgtk)
+       ((#:configure-flags flags #~'())
+        #~(cons "--with-xwidgets" #$flags))))
+    (inputs
+     (modify-inputs (package-inputs emacs-pgtk)
+       (prepend gsettings-desktop-schemas webkitgtk-with-libsoup2)))))
+
 ;; Lucid
 (define-public emacs-lucid
   (package/inherit emacs-no-x
