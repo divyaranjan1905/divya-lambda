@@ -431,6 +431,100 @@ languages.")
             (files '("lib/tree-sitter")))))
     (properties `((upstream-name . "emacs")))))
 
+(define-public emacs-no-x
+  (package/inherit emacs-minimal
+    (name "emacs-no-x")
+    (synopsis "The extensible, customizable, self-documenting text
+editor (console only)")
+    (arguments
+     (substitute-keyword-arguments (package-arguments emacs-minimal)
+       ((#:configure-flags flags #~'())
+        #~(cons* "--with-modules" "--with-native-compilation=aot"
+                 (delete "--with-gnutls=no" #$flags)))
+       ((#:phases phases)
+        #~(modify-phases #$phases
+            (add-after 'set-paths 'set-libgccjit-path
+              (lambda* (#:key inputs #:allow-other-keys)
+                (define (first-subdirectory/absolute directory)
+                  (let ((files (scandir
+                                directory
+                                (lambda (file)
+                                  (and (not (member file '("." "..")))
+                                       (file-is-directory? (string-append
+                                                            directory "/"
+                                                            file)))))))
+                    (and (not (null? files))
+                         (string-append directory "/" (car files)))))
+                (let* ((libgccjit-libdir
+                        (first-subdirectory/absolute ;; version
+                         (first-subdirectory/absolute ;; host type
+                          (search-input-directory inputs "lib/gcc")))))
+                  (setenv "LIBRARY_PATH"
+                          (string-append (getenv "LIBRARY_PATH")
+                                         ":" libgccjit-libdir)))))
+            (add-after 'unpack 'patch-compilation-driver
+              (lambda _
+                (substitute* "lisp/emacs-lisp/comp.el"
+                  (("\\(defcustom native-comp-driver-options nil")
+                   (format
+                    #f "(defcustom native-comp-driver-options '(~@{~s~^ ~})"
+                    (string-append
+                     "-B" #$(this-package-input "binutils") "/bin/")
+                    (string-append
+                     "-B" #$(this-package-input "glibc") "/lib/")
+                    (string-append
+                     "-B" #$(this-package-input "libgccjit") "/lib/")
+                    (string-append
+                     "-B" #$(this-package-input "libgccjit") "/lib/gcc/"))))))
+            (add-after 'build 'build-trampolines
+              (lambda* (#:key make-flags #:allow-other-keys)
+                (apply invoke "make" "trampolines" make-flags)))
+            (add-after 'validate-runpath 'validate-comp-integrity
+              (lambda* (#:key outputs #:allow-other-keys)
+                #$(cond
+                   ((%current-target-system)
+                    #~(display "Cannot validate native-comp on cross builds.\n"))
+                   ((member (%current-system) '("armhf-linux" "i686-linux"))
+                    #~(display "Integrity test is broken on armhf.\n"))
+                   (else
+                    #~(invoke
+                       (string-append (assoc-ref outputs "out") "/bin/emacs")
+                       "--batch"
+                       "--load"
+                       #$(local-file
+                          (search-auxiliary-file "emacs/comp-integrity.el"))
+                       "-f" "ert-run-tests-batch-and-exit")))))))))
+    (inputs
+     (modify-inputs (package-inputs emacs-minimal)
+       (prepend gnutls
+                ;; To "unshadow" ld-wrapper in native builds
+                (make-ld-wrapper "ld-wrapper" #:binutils binutils)
+                ;; For native compilation
+                binutils
+                (libc-for-target)
+                libgccjit
+
+                ;; Avoid Emacs's limited movemail substitute that retrieves POP3
+                ;; email only via insecure channels.
+                ;; This is not needed for (modern) IMAP.
+                mailutils
+
+                acl
+                alsa-lib
+                elogind
+                ghostscript
+                gpm
+                jansson
+                lcms
+                libice
+                libselinux
+                libsm
+                libxml2
+                m17n-lib
+                sqlite
+                tree-sitter
+                zlib)))))
+
 (define-public emacs
   (package/inherit emacs-no-x
     (name "emacs")
