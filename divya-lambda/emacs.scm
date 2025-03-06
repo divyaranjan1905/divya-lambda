@@ -582,6 +582,20 @@ editor (console only)")
     (description "This Emacs build implements graphical UI purely in terms
 of GTK.")))
 
+;; XWidgets
+(define-public emacs-xwidgets
+  (package/inherit emacs
+    (name "emacs-xwidgets")
+    (synopsis "The extensible, customizable, self-documenting text
+editor (with xwidgets support)")
+    (arguments
+     (substitute-keyword-arguments (package-arguments emacs)
+       ((#:configure-flags flags #~'())
+        #~(cons "--with-xwidgets" #$flags))))
+    (inputs
+     (modify-inputs (package-inputs emacs)
+       (prepend webkitgtk-with-libsoup2 libxcomposite)))))
+
 ;; Lucid
 (define-public emacs-lucid
   (package/inherit emacs-no-x
