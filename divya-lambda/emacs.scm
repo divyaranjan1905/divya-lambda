@@ -628,3 +628,21 @@ editor (with xwidgets support)")
 
 (define-public emacs-master-lucid
   (emacs->emacs-master emacs-lucid))
+;; Motif
+(define-public emacs-motif
+  (package/inherit emacs-no-x
+    (name "emacs-motif")
+    (synopsis
+     "The extensible, customizable, self-documenting text editor (with Motif
+toolkit)")
+    ;; Using emacs' inputs as base, since it has all the graphical stuff
+    (inputs (modify-inputs (package-inputs emacs)
+              (delete "gtk+")
+              (prepend inotify-tools motif)))
+    (arguments
+     (substitute-keyword-arguments
+         (package-arguments emacs-no-x)
+       ((#:configure-flags flags #~'())
+        #~(cons "--with-x-toolkit=motif"
+                #$flags))))))
+
