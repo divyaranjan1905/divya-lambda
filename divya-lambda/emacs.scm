@@ -570,6 +570,7 @@ editor (console only)")
                libxpm
                pango
                poppler)))))
+
 ;; PGTK
 (define-public emacs-pgtk
   (package/inherit emacs
@@ -626,8 +627,6 @@ editor (with xwidgets support)")
                   #~(cons "--with-x-toolkit=lucid"
                           #$flags))))))
 
-(define-public emacs-master-lucid
-  (emacs->emacs-master emacs-lucid))
 ;; Motif
 (define-public emacs-motif
   (package/inherit emacs-no-x
@@ -646,3 +645,17 @@ toolkit)")
         #~(cons "--with-x-toolkit=motif"
                 #$flags))))))
 
+;; Emacs’ own toolkit
+(define-public emacs-no-x-toolkit
+  (package/inherit emacs-no-x
+    (name "emacs-no-x-toolkit")
+    (synopsis "The extensible, customizable, self-documenting text
+editor (without X toolkit)" )
+    ;; Using emacs' inputs as base, since it has all the graphical stuff
+    (inputs (modify-inputs (package-inputs emacs)
+              (delete "gtk+")
+              (prepend inotify-tools)))
+    (arguments
+     (substitute-keyword-arguments (package-arguments emacs-no-x)
+       ((#:configure-flags flags #~'())
+        #~(cons "--with-x-toolkit=no" #$flags))))))
