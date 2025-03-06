@@ -570,6 +570,18 @@ editor (console only)")
                libxpm
                pango
                poppler)))))
+;; PGTK
+(define-public emacs-pgtk
+  (package/inherit emacs
+    (name "emacs-pgtk")
+    (arguments
+     (substitute-keyword-arguments (package-arguments emacs)
+       ((#:configure-flags flags #~'())
+        #~(cons* "--with-pgtk" #$flags))))
+    (synopsis "Emacs text editor with @code{pgtk} frames")
+    (description "This Emacs build implements graphical UI purely in terms
+of GTK.")))
+
 ;; Lucid
 (define-public emacs-lucid
   (package/inherit emacs-no-x
