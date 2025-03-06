@@ -33,6 +33,7 @@ Here are the packages that are publicly available from the channel:
 ** Emacs
 *** Emacs Builds
 =(divya-lambda emacs):=
+- Latest stable release of Emacs from Guix’s emacs-team branch
 - =emacs-master=
 - =emacs-lucid= ([[https://lists.gnu.org/archive/html/guix-patches/2024-12/msg02003.html][Sent]] upstream)
 - =emacs-master-pgtk=
