@@ -25,12 +25,29 @@
   #:use-module (guix gexp)
   #:use-module (guix git-download)
   #:use-module (guix download)
+  #:use-module (guix build-system)
   #:use-module (guix build-system gnu)
   #:use-module (guix build-system glib-or-gtk)
 
+  #:use-module (gnu packages)
   #:use-module (gnu packages xorg)
+  #:use-module (gnu packages bash)
+  #:use-module (gnu packages base)
+  #:use-module (gnu packages gawk)
+  #:use-module (gnu packages compression)
+  #:use-module (gnu packages ncurses)
+  #:use-module (gnu packages autotools)
+  #:use-module (gnu packages pkg-config)
+  #:use-module (gnu packages texinfo)
   #:use-module (gnu packages emacs)
   #:use-module (gnu packages gtk))
+
+(define (%emacs-modules build-system)
+  (let ((which (build-system-name build-system)))
+    `((guix build ,(symbol-append which '-build-system))
+      (guix build utils)
+      (srfi srfi-1)
+      (ice-9 ftw))))
 
 ;; Updated from emacs-master channel:
 ;; https://codeberg.org/akib/guix-channel-emacs-master/src/branch/master/emacs-master.scm
