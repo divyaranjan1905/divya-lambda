@@ -66,3 +66,4 @@ These are some other interesting channels worth checking out:
 
 - [[https://codeberg.org/anemofilia/radix][GNU/Radix]]
 - [[https://github.com/umanwizard/guix-rust-next][rust-next]]
+- [[https://codeberg.org/pastor/omega][omega]]
