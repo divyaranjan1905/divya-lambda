@@ -83,7 +83,7 @@
 (define emacs-master-time
   "1740879684")
 (define emacs-master-hash
-  "1716hjm52a20945m8mpzi812pcpwnjq0c0c2y2y81i3lxx03p1dm")
+  "1qf7xrmkfkb248vp8f1d64vqq6qn67snkn7jiav87ri7d08npffg")
 ;;; !!! EMACS COMMIT AND HASH END !!!
 
 (define-public emacs-master-minimal
