@@ -234,7 +234,6 @@
   (emacs->emacs-master emacs-lucid))
 
 ;;;; Latest Emacs Stable Release (follows Guix’s emacs-team branch)
-
 (define-public emacs-minimal
   (package
     (name "emacs-minimal")
